@@ -1,0 +1,3738 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> Programa
+Rule 1     Programa -> DeclFuncVar DeclProg
+Rule 2     DeclFuncVar -> Tipo ID DeclVar SEMICOLON DeclFuncVar
+Rule 3     DeclFuncVar -> Tipo ID LCOLC NUMBER RCOLC DeclVar SEMICOLON DeclFuncVar
+Rule 4     DeclFuncVar -> Tipo ID DeclFunc DeclFuncVar
+Rule 5     DeclFuncVar -> <empty>
+Rule 6     DeclProg -> PROGRAMA Bloco
+Rule 7     DeclVar -> COMMA ID DeclVar
+Rule 8     DeclVar -> COMMA ID LCOLC NUMBER RCOLC DeclVar
+Rule 9     DeclVar -> <empty>
+Rule 10    DeclFunc -> LPAREN ListaParametros RPAREN Bloco
+Rule 11    ListaParametros -> <empty>
+Rule 12    ListaParametros -> ListaParametrosCont
+Rule 13    ListaParametrosCont -> Tipo ID
+Rule 14    ListaParametrosCont -> Tipo ID LCOLC RCOLC
+Rule 15    ListaParametrosCont -> Tipo ID COMMA ListaParametrosCont
+Rule 16    ListaParametrosCont -> Tipo ID LCOLC RCOLC COMMA ListaParametrosCont
+Rule 17    Bloco -> LBRACE ListaDeclVar ListaComando RBRACE
+Rule 18    Bloco -> LBRACE ListaDeclVar RBRACE
+Rule 19    ListaDeclVar -> <empty>
+Rule 20    ListaDeclVar -> Tipo ID DeclVar SEMICOLON ListaDeclVar
+Rule 21    ListaDeclVar -> Tipo ID LCOLC NUMBER RCOLC DeclVar SEMICOLON ListaDeclVar
+Rule 22    Tipo -> INT
+Rule 23    Tipo -> CAR
+Rule 24    ListaComando -> Comando
+Rule 25    ListaComando -> Comando ListaComando
+Rule 26    Comando -> SEMICOLON
+Rule 27    Comando -> Expr SEMICOLON
+Rule 28    Comando -> RETORNE Expr SEMICOLON
+Rule 29    Comando -> LEIA LValueExpr SEMICOLON
+Rule 30    Comando -> ESCREVA Expr SEMICOLON
+Rule 31    Comando -> ESCREVA NORMALSTRING SEMICOLON
+Rule 32    Comando -> NOVALINHA SEMICOLON
+Rule 33    Comando -> SE LPAREN Expr RPAREN ENTAO Comando
+Rule 34    Comando -> SE LPAREN Expr RPAREN ENTAO Comando SENAO Comando
+Rule 35    Comando -> ENQUANTO LPAREN Expr RPAREN EXECUTE Comando
+Rule 36    Comando -> Bloco
+Rule 37    Expr -> AssignExpr
+Rule 38    AssignExpr -> CondExpr
+Rule 39    AssignExpr -> LValueExpr ASSIGN AssignExpr
+Rule 40    CondExpr -> OrExpr
+Rule 41    CondExpr -> OrExpr INTERROGATION Expr COLON CondExpr
+Rule 42    OrExpr -> OrExpr OU AndExpr
+Rule 43    OrExpr -> AndExpr
+Rule 44    AndExpr -> AndExpr E EqExpr
+Rule 45    AndExpr -> EqExpr
+Rule 46    EqExpr -> EqExpr EQUALS DesigExpr
+Rule 47    EqExpr -> EqExpr DIFF DesigExpr
+Rule 48    EqExpr -> DesigExpr
+Rule 49    DesigExpr -> DesigExpr MENOR AddExpr
+Rule 50    DesigExpr -> DesigExpr MAIOR AddExpr
+Rule 51    DesigExpr -> DesigExpr MAIOREQUALS AddExpr
+Rule 52    DesigExpr -> DesigExpr MENOREQUALS AddExpr
+Rule 53    DesigExpr -> AddExpr
+Rule 54    AddExpr -> AddExpr PLUS MulExpr
+Rule 55    AddExpr -> AddExpr MINUS MulExpr
+Rule 56    AddExpr -> MulExpr
+Rule 57    MulExpr -> MulExpr TIMES UnExpr
+Rule 58    MulExpr -> MulExpr DIVIDE UnExpr
+Rule 59    MulExpr -> MulExpr MOD UnExpr
+Rule 60    MulExpr -> UnExpr
+Rule 61    UnExpr -> MINUS PrimExpr
+Rule 62    UnExpr -> EXPLAMATION PrimExpr
+Rule 63    UnExpr -> PrimExpr
+Rule 64    LValueExpr -> ID LCOLC Expr RCOLC
+Rule 65    LValueExpr -> ID
+Rule 66    PrimExpr -> ID LPAREN ListExpr RPAREN
+Rule 67    PrimExpr -> ID LPAREN RPAREN
+Rule 68    PrimExpr -> ID LCOLC Expr RCOLC
+Rule 69    PrimExpr -> ID
+Rule 70    PrimExpr -> CONSTSTRING
+Rule 71    PrimExpr -> NUMBER
+Rule 72    PrimExpr -> LPAREN Expr RPAREN
+Rule 73    ListExpr -> AssignExpr
+Rule 74    ListExpr -> ListExpr COMMA AssignExpr
+
+Terminals, with rules where they appear
+
+ASSIGN               : 39
+CAR                  : 23
+COLON                : 41
+COMMA                : 7 8 15 16 74
+CONSTSTRING          : 70
+DIFF                 : 47
+DIVIDE               : 58
+E                    : 44
+ENQUANTO             : 35
+ENTAO                : 33 34
+EQUALS               : 46
+ESCREVA              : 30 31
+EXECUTE              : 35
+EXPLAMATION          : 62
+ID                   : 2 3 4 7 8 13 14 15 16 20 21 64 65 66 67 68 69
+INT                  : 22
+INTERROGATION        : 41
+LBRACE               : 17 18
+LCOLC                : 3 8 14 16 21 64 68
+LEIA                 : 29
+LPAREN               : 10 33 34 35 66 67 72
+MAIOR                : 50
+MAIOREQUALS          : 51
+MENOR                : 49
+MENOREQUALS          : 52
+MINUS                : 55 61
+MOD                  : 59
+NORMALSTRING         : 31
+NOVALINHA            : 32
+NUMBER               : 3 8 21 71
+OU                   : 42
+PLUS                 : 54
+PROGRAMA             : 6
+RBRACE               : 17 18
+RCOLC                : 3 8 14 16 21 64 68
+RETORNE              : 28
+RPAREN               : 10 33 34 35 66 67 72
+SE                   : 33 34
+SEMICOLON            : 2 3 20 21 26 27 28 29 30 31 32
+SENAO                : 34
+TIMES                : 57
+error                : 
+
+Nonterminals, with rules where they appear
+
+AddExpr              : 49 50 51 52 53 54 55
+AndExpr              : 42 43 44
+AssignExpr           : 37 39 73 74
+Bloco                : 6 10 36
+Comando              : 24 25 33 34 34 35
+CondExpr             : 38 41
+DeclFunc             : 4
+DeclFuncVar          : 1 2 3 4
+DeclProg             : 1
+DeclVar              : 2 3 7 8 20 21
+DesigExpr            : 46 47 48 49 50 51 52
+EqExpr               : 44 45 46 47
+Expr                 : 27 28 30 33 34 35 41 64 68 72
+LValueExpr           : 29 39
+ListExpr             : 66 74
+ListaComando         : 17 25
+ListaDeclVar         : 17 18 20 21
+ListaParametros      : 10
+ListaParametrosCont  : 12 15 16
+MulExpr              : 54 55 56 57 58 59
+OrExpr               : 40 41 42
+PrimExpr             : 61 62 63
+Programa             : 0
+Tipo                 : 2 3 4 13 14 15 16 20 21
+UnExpr               : 57 58 59 60
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . Programa
+    (1) Programa -> . DeclFuncVar DeclProg
+    (2) DeclFuncVar -> . Tipo ID DeclVar SEMICOLON DeclFuncVar
+    (3) DeclFuncVar -> . Tipo ID LCOLC NUMBER RCOLC DeclVar SEMICOLON DeclFuncVar
+    (4) DeclFuncVar -> . Tipo ID DeclFunc DeclFuncVar
+    (5) DeclFuncVar -> .
+    (22) Tipo -> . INT
+    (23) Tipo -> . CAR
+
+    PROGRAMA        reduce using rule 5 (DeclFuncVar -> .)
+    INT             shift and go to state 4
+    CAR             shift and go to state 5
+
+    Programa                       shift and go to state 1
+    DeclFuncVar                    shift and go to state 2
+    Tipo                           shift and go to state 3
+
+state 1
+
+    (0) S' -> Programa .
+
+
+
+state 2
+
+    (1) Programa -> DeclFuncVar . DeclProg
+    (6) DeclProg -> . PROGRAMA Bloco
+
+    PROGRAMA        shift and go to state 7
+
+    DeclProg                       shift and go to state 6
+
+state 3
+
+    (2) DeclFuncVar -> Tipo . ID DeclVar SEMICOLON DeclFuncVar
+    (3) DeclFuncVar -> Tipo . ID LCOLC NUMBER RCOLC DeclVar SEMICOLON DeclFuncVar
+    (4) DeclFuncVar -> Tipo . ID DeclFunc DeclFuncVar
+
+    ID              shift and go to state 8
+
+
+state 4
+
+    (22) Tipo -> INT .
+
+    ID              reduce using rule 22 (Tipo -> INT .)
+
+
+state 5
+
+    (23) Tipo -> CAR .
+
+    ID              reduce using rule 23 (Tipo -> CAR .)
+
+
+state 6
+
+    (1) Programa -> DeclFuncVar DeclProg .
+
+    $end            reduce using rule 1 (Programa -> DeclFuncVar DeclProg .)
+
+
+state 7
+
+    (6) DeclProg -> PROGRAMA . Bloco
+    (17) Bloco -> . LBRACE ListaDeclVar ListaComando RBRACE
+    (18) Bloco -> . LBRACE ListaDeclVar RBRACE
+
+    LBRACE          shift and go to state 10
+
+    Bloco                          shift and go to state 9
+
+state 8
+
+    (2) DeclFuncVar -> Tipo ID . DeclVar SEMICOLON DeclFuncVar
+    (3) DeclFuncVar -> Tipo ID . LCOLC NUMBER RCOLC DeclVar SEMICOLON DeclFuncVar
+    (4) DeclFuncVar -> Tipo ID . DeclFunc DeclFuncVar
+    (7) DeclVar -> . COMMA ID DeclVar
+    (8) DeclVar -> . COMMA ID LCOLC NUMBER RCOLC DeclVar
+    (9) DeclVar -> .
+    (10) DeclFunc -> . LPAREN ListaParametros RPAREN Bloco
+
+    LCOLC           shift and go to state 12
+    COMMA           shift and go to state 14
+    SEMICOLON       reduce using rule 9 (DeclVar -> .)
+    LPAREN          shift and go to state 15
+
+    DeclVar                        shift and go to state 11
+    DeclFunc                       shift and go to state 13
+
+state 9
+
+    (6) DeclProg -> PROGRAMA Bloco .
+
+    $end            reduce using rule 6 (DeclProg -> PROGRAMA Bloco .)
+
+
+state 10
+
+    (17) Bloco -> LBRACE . ListaDeclVar ListaComando RBRACE
+    (18) Bloco -> LBRACE . ListaDeclVar RBRACE
+    (19) ListaDeclVar -> .
+    (20) ListaDeclVar -> . Tipo ID DeclVar SEMICOLON ListaDeclVar
+    (21) ListaDeclVar -> . Tipo ID LCOLC NUMBER RCOLC DeclVar SEMICOLON ListaDeclVar
+    (22) Tipo -> . INT
+    (23) Tipo -> . CAR
+
+    RBRACE          reduce using rule 19 (ListaDeclVar -> .)
+    SEMICOLON       reduce using rule 19 (ListaDeclVar -> .)
+    RETORNE         reduce using rule 19 (ListaDeclVar -> .)
+    LEIA            reduce using rule 19 (ListaDeclVar -> .)
+    ESCREVA         reduce using rule 19 (ListaDeclVar -> .)
+    NOVALINHA       reduce using rule 19 (ListaDeclVar -> .)
+    SE              reduce using rule 19 (ListaDeclVar -> .)
+    ENQUANTO        reduce using rule 19 (ListaDeclVar -> .)
+    LBRACE          reduce using rule 19 (ListaDeclVar -> .)
+    ID              reduce using rule 19 (ListaDeclVar -> .)
+    MINUS           reduce using rule 19 (ListaDeclVar -> .)
+    EXPLAMATION     reduce using rule 19 (ListaDeclVar -> .)
+    CONSTSTRING     reduce using rule 19 (ListaDeclVar -> .)
+    NUMBER          reduce using rule 19 (ListaDeclVar -> .)
+    LPAREN          reduce using rule 19 (ListaDeclVar -> .)
+    INT             shift and go to state 4
+    CAR             shift and go to state 5
+
+    ListaDeclVar                   shift and go to state 16
+    Tipo                           shift and go to state 17
+
+state 11
+
+    (2) DeclFuncVar -> Tipo ID DeclVar . SEMICOLON DeclFuncVar
+
+    SEMICOLON       shift and go to state 18
+
+
+state 12
+
+    (3) DeclFuncVar -> Tipo ID LCOLC . NUMBER RCOLC DeclVar SEMICOLON DeclFuncVar
+
+    NUMBER          shift and go to state 19
+
+
+state 13
+
+    (4) DeclFuncVar -> Tipo ID DeclFunc . DeclFuncVar
+    (2) DeclFuncVar -> . Tipo ID DeclVar SEMICOLON DeclFuncVar
+    (3) DeclFuncVar -> . Tipo ID LCOLC NUMBER RCOLC DeclVar SEMICOLON DeclFuncVar
+    (4) DeclFuncVar -> . Tipo ID DeclFunc DeclFuncVar
+    (5) DeclFuncVar -> .
+    (22) Tipo -> . INT
+    (23) Tipo -> . CAR
+
+    PROGRAMA        reduce using rule 5 (DeclFuncVar -> .)
+    INT             shift and go to state 4
+    CAR             shift and go to state 5
+
+    Tipo                           shift and go to state 3
+    DeclFuncVar                    shift and go to state 20
+
+state 14
+
+    (7) DeclVar -> COMMA . ID DeclVar
+    (8) DeclVar -> COMMA . ID LCOLC NUMBER RCOLC DeclVar
+
+    ID              shift and go to state 21
+
+
+state 15
+
+    (10) DeclFunc -> LPAREN . ListaParametros RPAREN Bloco
+    (11) ListaParametros -> .
+    (12) ListaParametros -> . ListaParametrosCont
+    (13) ListaParametrosCont -> . Tipo ID
+    (14) ListaParametrosCont -> . Tipo ID LCOLC RCOLC
+    (15) ListaParametrosCont -> . Tipo ID COMMA ListaParametrosCont
+    (16) ListaParametrosCont -> . Tipo ID LCOLC RCOLC COMMA ListaParametrosCont
+    (22) Tipo -> . INT
+    (23) Tipo -> . CAR
+
+    RPAREN          reduce using rule 11 (ListaParametros -> .)
+    INT             shift and go to state 4
+    CAR             shift and go to state 5
+
+    ListaParametros                shift and go to state 22
+    ListaParametrosCont            shift and go to state 23
+    Tipo                           shift and go to state 24
+
+state 16
+
+    (17) Bloco -> LBRACE ListaDeclVar . ListaComando RBRACE
+    (18) Bloco -> LBRACE ListaDeclVar . RBRACE
+    (24) ListaComando -> . Comando
+    (25) ListaComando -> . Comando ListaComando
+    (26) Comando -> . SEMICOLON
+    (27) Comando -> . Expr SEMICOLON
+    (28) Comando -> . RETORNE Expr SEMICOLON
+    (29) Comando -> . LEIA LValueExpr SEMICOLON
+    (30) Comando -> . ESCREVA Expr SEMICOLON
+    (31) Comando -> . ESCREVA NORMALSTRING SEMICOLON
+    (32) Comando -> . NOVALINHA SEMICOLON
+    (33) Comando -> . SE LPAREN Expr RPAREN ENTAO Comando
+    (34) Comando -> . SE LPAREN Expr RPAREN ENTAO Comando SENAO Comando
+    (35) Comando -> . ENQUANTO LPAREN Expr RPAREN EXECUTE Comando
+    (36) Comando -> . Bloco
+    (37) Expr -> . AssignExpr
+    (17) Bloco -> . LBRACE ListaDeclVar ListaComando RBRACE
+    (18) Bloco -> . LBRACE ListaDeclVar RBRACE
+    (38) AssignExpr -> . CondExpr
+    (39) AssignExpr -> . LValueExpr ASSIGN AssignExpr
+    (40) CondExpr -> . OrExpr
+    (41) CondExpr -> . OrExpr INTERROGATION Expr COLON CondExpr
+    (64) LValueExpr -> . ID LCOLC Expr RCOLC
+    (65) LValueExpr -> . ID
+    (42) OrExpr -> . OrExpr OU AndExpr
+    (43) OrExpr -> . AndExpr
+    (44) AndExpr -> . AndExpr E EqExpr
+    (45) AndExpr -> . EqExpr
+    (46) EqExpr -> . EqExpr EQUALS DesigExpr
+    (47) EqExpr -> . EqExpr DIFF DesigExpr
+    (48) EqExpr -> . DesigExpr
+    (49) DesigExpr -> . DesigExpr MENOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (51) DesigExpr -> . DesigExpr MAIOREQUALS AddExpr
+    (52) DesigExpr -> . DesigExpr MENOREQUALS AddExpr
+    (53) DesigExpr -> . AddExpr
+    (54) AddExpr -> . AddExpr PLUS MulExpr
+    (55) AddExpr -> . AddExpr MINUS MulExpr
+    (56) AddExpr -> . MulExpr
+    (57) MulExpr -> . MulExpr TIMES UnExpr
+    (58) MulExpr -> . MulExpr DIVIDE UnExpr
+    (59) MulExpr -> . MulExpr MOD UnExpr
+    (60) MulExpr -> . UnExpr
+    (61) UnExpr -> . MINUS PrimExpr
+    (62) UnExpr -> . EXPLAMATION PrimExpr
+    (63) UnExpr -> . PrimExpr
+    (66) PrimExpr -> . ID LPAREN ListExpr RPAREN
+    (67) PrimExpr -> . ID LPAREN RPAREN
+    (68) PrimExpr -> . ID LCOLC Expr RCOLC
+    (69) PrimExpr -> . ID
+    (70) PrimExpr -> . CONSTSTRING
+    (71) PrimExpr -> . NUMBER
+    (72) PrimExpr -> . LPAREN Expr RPAREN
+
+    RBRACE          shift and go to state 26
+    SEMICOLON       shift and go to state 28
+    RETORNE         shift and go to state 30
+    LEIA            shift and go to state 31
+    ESCREVA         shift and go to state 33
+    NOVALINHA       shift and go to state 34
+    SE              shift and go to state 35
+    ENQUANTO        shift and go to state 37
+    LBRACE          shift and go to state 10
+    ID              shift and go to state 42
+    MINUS           shift and go to state 48
+    EXPLAMATION     shift and go to state 51
+    CONSTSTRING     shift and go to state 52
+    NUMBER          shift and go to state 53
+    LPAREN          shift and go to state 36
+
+    ListaComando                   shift and go to state 25
+    Comando                        shift and go to state 27
+    Expr                           shift and go to state 29
+    LValueExpr                     shift and go to state 32
+    Bloco                          shift and go to state 38
+    AssignExpr                     shift and go to state 39
+    CondExpr                       shift and go to state 40
+    OrExpr                         shift and go to state 41
+    AndExpr                        shift and go to state 43
+    EqExpr                         shift and go to state 44
+    DesigExpr                      shift and go to state 45
+    AddExpr                        shift and go to state 46
+    MulExpr                        shift and go to state 47
+    UnExpr                         shift and go to state 49
+    PrimExpr                       shift and go to state 50
+
+state 17
+
+    (20) ListaDeclVar -> Tipo . ID DeclVar SEMICOLON ListaDeclVar
+    (21) ListaDeclVar -> Tipo . ID LCOLC NUMBER RCOLC DeclVar SEMICOLON ListaDeclVar
+
+    ID              shift and go to state 54
+
+
+state 18
+
+    (2) DeclFuncVar -> Tipo ID DeclVar SEMICOLON . DeclFuncVar
+    (2) DeclFuncVar -> . Tipo ID DeclVar SEMICOLON DeclFuncVar
+    (3) DeclFuncVar -> . Tipo ID LCOLC NUMBER RCOLC DeclVar SEMICOLON DeclFuncVar
+    (4) DeclFuncVar -> . Tipo ID DeclFunc DeclFuncVar
+    (5) DeclFuncVar -> .
+    (22) Tipo -> . INT
+    (23) Tipo -> . CAR
+
+    PROGRAMA        reduce using rule 5 (DeclFuncVar -> .)
+    INT             shift and go to state 4
+    CAR             shift and go to state 5
+
+    Tipo                           shift and go to state 3
+    DeclFuncVar                    shift and go to state 55
+
+state 19
+
+    (3) DeclFuncVar -> Tipo ID LCOLC NUMBER . RCOLC DeclVar SEMICOLON DeclFuncVar
+
+    RCOLC           shift and go to state 56
+
+
+state 20
+
+    (4) DeclFuncVar -> Tipo ID DeclFunc DeclFuncVar .
+
+    PROGRAMA        reduce using rule 4 (DeclFuncVar -> Tipo ID DeclFunc DeclFuncVar .)
+
+
+state 21
+
+    (7) DeclVar -> COMMA ID . DeclVar
+    (8) DeclVar -> COMMA ID . LCOLC NUMBER RCOLC DeclVar
+    (7) DeclVar -> . COMMA ID DeclVar
+    (8) DeclVar -> . COMMA ID LCOLC NUMBER RCOLC DeclVar
+    (9) DeclVar -> .
+
+    LCOLC           shift and go to state 58
+    COMMA           shift and go to state 14
+    SEMICOLON       reduce using rule 9 (DeclVar -> .)
+
+    DeclVar                        shift and go to state 57
+
+state 22
+
+    (10) DeclFunc -> LPAREN ListaParametros . RPAREN Bloco
+
+    RPAREN          shift and go to state 59
+
+
+state 23
+
+    (12) ListaParametros -> ListaParametrosCont .
+
+    RPAREN          reduce using rule 12 (ListaParametros -> ListaParametrosCont .)
+
+
+state 24
+
+    (13) ListaParametrosCont -> Tipo . ID
+    (14) ListaParametrosCont -> Tipo . ID LCOLC RCOLC
+    (15) ListaParametrosCont -> Tipo . ID COMMA ListaParametrosCont
+    (16) ListaParametrosCont -> Tipo . ID LCOLC RCOLC COMMA ListaParametrosCont
+
+    ID              shift and go to state 60
+
+
+state 25
+
+    (17) Bloco -> LBRACE ListaDeclVar ListaComando . RBRACE
+
+    RBRACE          shift and go to state 61
+
+
+state 26
+
+    (18) Bloco -> LBRACE ListaDeclVar RBRACE .
+
+    $end            reduce using rule 18 (Bloco -> LBRACE ListaDeclVar RBRACE .)
+    SEMICOLON       reduce using rule 18 (Bloco -> LBRACE ListaDeclVar RBRACE .)
+    RETORNE         reduce using rule 18 (Bloco -> LBRACE ListaDeclVar RBRACE .)
+    LEIA            reduce using rule 18 (Bloco -> LBRACE ListaDeclVar RBRACE .)
+    ESCREVA         reduce using rule 18 (Bloco -> LBRACE ListaDeclVar RBRACE .)
+    NOVALINHA       reduce using rule 18 (Bloco -> LBRACE ListaDeclVar RBRACE .)
+    SE              reduce using rule 18 (Bloco -> LBRACE ListaDeclVar RBRACE .)
+    ENQUANTO        reduce using rule 18 (Bloco -> LBRACE ListaDeclVar RBRACE .)
+    LBRACE          reduce using rule 18 (Bloco -> LBRACE ListaDeclVar RBRACE .)
+    ID              reduce using rule 18 (Bloco -> LBRACE ListaDeclVar RBRACE .)
+    MINUS           reduce using rule 18 (Bloco -> LBRACE ListaDeclVar RBRACE .)
+    EXPLAMATION     reduce using rule 18 (Bloco -> LBRACE ListaDeclVar RBRACE .)
+    CONSTSTRING     reduce using rule 18 (Bloco -> LBRACE ListaDeclVar RBRACE .)
+    NUMBER          reduce using rule 18 (Bloco -> LBRACE ListaDeclVar RBRACE .)
+    LPAREN          reduce using rule 18 (Bloco -> LBRACE ListaDeclVar RBRACE .)
+    RBRACE          reduce using rule 18 (Bloco -> LBRACE ListaDeclVar RBRACE .)
+    INT             reduce using rule 18 (Bloco -> LBRACE ListaDeclVar RBRACE .)
+    CAR             reduce using rule 18 (Bloco -> LBRACE ListaDeclVar RBRACE .)
+    PROGRAMA        reduce using rule 18 (Bloco -> LBRACE ListaDeclVar RBRACE .)
+    SENAO           reduce using rule 18 (Bloco -> LBRACE ListaDeclVar RBRACE .)
+
+
+state 27
+
+    (24) ListaComando -> Comando .
+    (25) ListaComando -> Comando . ListaComando
+    (24) ListaComando -> . Comando
+    (25) ListaComando -> . Comando ListaComando
+    (26) Comando -> . SEMICOLON
+    (27) Comando -> . Expr SEMICOLON
+    (28) Comando -> . RETORNE Expr SEMICOLON
+    (29) Comando -> . LEIA LValueExpr SEMICOLON
+    (30) Comando -> . ESCREVA Expr SEMICOLON
+    (31) Comando -> . ESCREVA NORMALSTRING SEMICOLON
+    (32) Comando -> . NOVALINHA SEMICOLON
+    (33) Comando -> . SE LPAREN Expr RPAREN ENTAO Comando
+    (34) Comando -> . SE LPAREN Expr RPAREN ENTAO Comando SENAO Comando
+    (35) Comando -> . ENQUANTO LPAREN Expr RPAREN EXECUTE Comando
+    (36) Comando -> . Bloco
+    (37) Expr -> . AssignExpr
+    (17) Bloco -> . LBRACE ListaDeclVar ListaComando RBRACE
+    (18) Bloco -> . LBRACE ListaDeclVar RBRACE
+    (38) AssignExpr -> . CondExpr
+    (39) AssignExpr -> . LValueExpr ASSIGN AssignExpr
+    (40) CondExpr -> . OrExpr
+    (41) CondExpr -> . OrExpr INTERROGATION Expr COLON CondExpr
+    (64) LValueExpr -> . ID LCOLC Expr RCOLC
+    (65) LValueExpr -> . ID
+    (42) OrExpr -> . OrExpr OU AndExpr
+    (43) OrExpr -> . AndExpr
+    (44) AndExpr -> . AndExpr E EqExpr
+    (45) AndExpr -> . EqExpr
+    (46) EqExpr -> . EqExpr EQUALS DesigExpr
+    (47) EqExpr -> . EqExpr DIFF DesigExpr
+    (48) EqExpr -> . DesigExpr
+    (49) DesigExpr -> . DesigExpr MENOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (51) DesigExpr -> . DesigExpr MAIOREQUALS AddExpr
+    (52) DesigExpr -> . DesigExpr MENOREQUALS AddExpr
+    (53) DesigExpr -> . AddExpr
+    (54) AddExpr -> . AddExpr PLUS MulExpr
+    (55) AddExpr -> . AddExpr MINUS MulExpr
+    (56) AddExpr -> . MulExpr
+    (57) MulExpr -> . MulExpr TIMES UnExpr
+    (58) MulExpr -> . MulExpr DIVIDE UnExpr
+    (59) MulExpr -> . MulExpr MOD UnExpr
+    (60) MulExpr -> . UnExpr
+    (61) UnExpr -> . MINUS PrimExpr
+    (62) UnExpr -> . EXPLAMATION PrimExpr
+    (63) UnExpr -> . PrimExpr
+    (66) PrimExpr -> . ID LPAREN ListExpr RPAREN
+    (67) PrimExpr -> . ID LPAREN RPAREN
+    (68) PrimExpr -> . ID LCOLC Expr RCOLC
+    (69) PrimExpr -> . ID
+    (70) PrimExpr -> . CONSTSTRING
+    (71) PrimExpr -> . NUMBER
+    (72) PrimExpr -> . LPAREN Expr RPAREN
+
+    RBRACE          reduce using rule 24 (ListaComando -> Comando .)
+    SEMICOLON       shift and go to state 28
+    RETORNE         shift and go to state 30
+    LEIA            shift and go to state 31
+    ESCREVA         shift and go to state 33
+    NOVALINHA       shift and go to state 34
+    SE              shift and go to state 35
+    ENQUANTO        shift and go to state 37
+    LBRACE          shift and go to state 10
+    ID              shift and go to state 42
+    MINUS           shift and go to state 48
+    EXPLAMATION     shift and go to state 51
+    CONSTSTRING     shift and go to state 52
+    NUMBER          shift and go to state 53
+    LPAREN          shift and go to state 36
+
+    Comando                        shift and go to state 27
+    ListaComando                   shift and go to state 62
+    Expr                           shift and go to state 29
+    LValueExpr                     shift and go to state 32
+    Bloco                          shift and go to state 38
+    AssignExpr                     shift and go to state 39
+    CondExpr                       shift and go to state 40
+    OrExpr                         shift and go to state 41
+    AndExpr                        shift and go to state 43
+    EqExpr                         shift and go to state 44
+    DesigExpr                      shift and go to state 45
+    AddExpr                        shift and go to state 46
+    MulExpr                        shift and go to state 47
+    UnExpr                         shift and go to state 49
+    PrimExpr                       shift and go to state 50
+
+state 28
+
+    (26) Comando -> SEMICOLON .
+
+    SEMICOLON       reduce using rule 26 (Comando -> SEMICOLON .)
+    RETORNE         reduce using rule 26 (Comando -> SEMICOLON .)
+    LEIA            reduce using rule 26 (Comando -> SEMICOLON .)
+    ESCREVA         reduce using rule 26 (Comando -> SEMICOLON .)
+    NOVALINHA       reduce using rule 26 (Comando -> SEMICOLON .)
+    SE              reduce using rule 26 (Comando -> SEMICOLON .)
+    ENQUANTO        reduce using rule 26 (Comando -> SEMICOLON .)
+    LBRACE          reduce using rule 26 (Comando -> SEMICOLON .)
+    ID              reduce using rule 26 (Comando -> SEMICOLON .)
+    MINUS           reduce using rule 26 (Comando -> SEMICOLON .)
+    EXPLAMATION     reduce using rule 26 (Comando -> SEMICOLON .)
+    CONSTSTRING     reduce using rule 26 (Comando -> SEMICOLON .)
+    NUMBER          reduce using rule 26 (Comando -> SEMICOLON .)
+    LPAREN          reduce using rule 26 (Comando -> SEMICOLON .)
+    RBRACE          reduce using rule 26 (Comando -> SEMICOLON .)
+    SENAO           reduce using rule 26 (Comando -> SEMICOLON .)
+
+
+state 29
+
+    (27) Comando -> Expr . SEMICOLON
+
+    SEMICOLON       shift and go to state 63
+
+
+state 30
+
+    (28) Comando -> RETORNE . Expr SEMICOLON
+    (37) Expr -> . AssignExpr
+    (38) AssignExpr -> . CondExpr
+    (39) AssignExpr -> . LValueExpr ASSIGN AssignExpr
+    (40) CondExpr -> . OrExpr
+    (41) CondExpr -> . OrExpr INTERROGATION Expr COLON CondExpr
+    (64) LValueExpr -> . ID LCOLC Expr RCOLC
+    (65) LValueExpr -> . ID
+    (42) OrExpr -> . OrExpr OU AndExpr
+    (43) OrExpr -> . AndExpr
+    (44) AndExpr -> . AndExpr E EqExpr
+    (45) AndExpr -> . EqExpr
+    (46) EqExpr -> . EqExpr EQUALS DesigExpr
+    (47) EqExpr -> . EqExpr DIFF DesigExpr
+    (48) EqExpr -> . DesigExpr
+    (49) DesigExpr -> . DesigExpr MENOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (51) DesigExpr -> . DesigExpr MAIOREQUALS AddExpr
+    (52) DesigExpr -> . DesigExpr MENOREQUALS AddExpr
+    (53) DesigExpr -> . AddExpr
+    (54) AddExpr -> . AddExpr PLUS MulExpr
+    (55) AddExpr -> . AddExpr MINUS MulExpr
+    (56) AddExpr -> . MulExpr
+    (57) MulExpr -> . MulExpr TIMES UnExpr
+    (58) MulExpr -> . MulExpr DIVIDE UnExpr
+    (59) MulExpr -> . MulExpr MOD UnExpr
+    (60) MulExpr -> . UnExpr
+    (61) UnExpr -> . MINUS PrimExpr
+    (62) UnExpr -> . EXPLAMATION PrimExpr
+    (63) UnExpr -> . PrimExpr
+    (66) PrimExpr -> . ID LPAREN ListExpr RPAREN
+    (67) PrimExpr -> . ID LPAREN RPAREN
+    (68) PrimExpr -> . ID LCOLC Expr RCOLC
+    (69) PrimExpr -> . ID
+    (70) PrimExpr -> . CONSTSTRING
+    (71) PrimExpr -> . NUMBER
+    (72) PrimExpr -> . LPAREN Expr RPAREN
+
+    ID              shift and go to state 42
+    MINUS           shift and go to state 48
+    EXPLAMATION     shift and go to state 51
+    CONSTSTRING     shift and go to state 52
+    NUMBER          shift and go to state 53
+    LPAREN          shift and go to state 36
+
+    Expr                           shift and go to state 64
+    AssignExpr                     shift and go to state 39
+    CondExpr                       shift and go to state 40
+    LValueExpr                     shift and go to state 32
+    OrExpr                         shift and go to state 41
+    AndExpr                        shift and go to state 43
+    EqExpr                         shift and go to state 44
+    DesigExpr                      shift and go to state 45
+    AddExpr                        shift and go to state 46
+    MulExpr                        shift and go to state 47
+    UnExpr                         shift and go to state 49
+    PrimExpr                       shift and go to state 50
+
+state 31
+
+    (29) Comando -> LEIA . LValueExpr SEMICOLON
+    (64) LValueExpr -> . ID LCOLC Expr RCOLC
+    (65) LValueExpr -> . ID
+
+    ID              shift and go to state 66
+
+    LValueExpr                     shift and go to state 65
+
+state 32
+
+    (39) AssignExpr -> LValueExpr . ASSIGN AssignExpr
+
+    ASSIGN          shift and go to state 67
+
+
+state 33
+
+    (30) Comando -> ESCREVA . Expr SEMICOLON
+    (31) Comando -> ESCREVA . NORMALSTRING SEMICOLON
+    (37) Expr -> . AssignExpr
+    (38) AssignExpr -> . CondExpr
+    (39) AssignExpr -> . LValueExpr ASSIGN AssignExpr
+    (40) CondExpr -> . OrExpr
+    (41) CondExpr -> . OrExpr INTERROGATION Expr COLON CondExpr
+    (64) LValueExpr -> . ID LCOLC Expr RCOLC
+    (65) LValueExpr -> . ID
+    (42) OrExpr -> . OrExpr OU AndExpr
+    (43) OrExpr -> . AndExpr
+    (44) AndExpr -> . AndExpr E EqExpr
+    (45) AndExpr -> . EqExpr
+    (46) EqExpr -> . EqExpr EQUALS DesigExpr
+    (47) EqExpr -> . EqExpr DIFF DesigExpr
+    (48) EqExpr -> . DesigExpr
+    (49) DesigExpr -> . DesigExpr MENOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (51) DesigExpr -> . DesigExpr MAIOREQUALS AddExpr
+    (52) DesigExpr -> . DesigExpr MENOREQUALS AddExpr
+    (53) DesigExpr -> . AddExpr
+    (54) AddExpr -> . AddExpr PLUS MulExpr
+    (55) AddExpr -> . AddExpr MINUS MulExpr
+    (56) AddExpr -> . MulExpr
+    (57) MulExpr -> . MulExpr TIMES UnExpr
+    (58) MulExpr -> . MulExpr DIVIDE UnExpr
+    (59) MulExpr -> . MulExpr MOD UnExpr
+    (60) MulExpr -> . UnExpr
+    (61) UnExpr -> . MINUS PrimExpr
+    (62) UnExpr -> . EXPLAMATION PrimExpr
+    (63) UnExpr -> . PrimExpr
+    (66) PrimExpr -> . ID LPAREN ListExpr RPAREN
+    (67) PrimExpr -> . ID LPAREN RPAREN
+    (68) PrimExpr -> . ID LCOLC Expr RCOLC
+    (69) PrimExpr -> . ID
+    (70) PrimExpr -> . CONSTSTRING
+    (71) PrimExpr -> . NUMBER
+    (72) PrimExpr -> . LPAREN Expr RPAREN
+
+    NORMALSTRING    shift and go to state 69
+    ID              shift and go to state 42
+    MINUS           shift and go to state 48
+    EXPLAMATION     shift and go to state 51
+    CONSTSTRING     shift and go to state 52
+    NUMBER          shift and go to state 53
+    LPAREN          shift and go to state 36
+
+    Expr                           shift and go to state 68
+    AssignExpr                     shift and go to state 39
+    CondExpr                       shift and go to state 40
+    LValueExpr                     shift and go to state 32
+    OrExpr                         shift and go to state 41
+    AndExpr                        shift and go to state 43
+    EqExpr                         shift and go to state 44
+    DesigExpr                      shift and go to state 45
+    AddExpr                        shift and go to state 46
+    MulExpr                        shift and go to state 47
+    UnExpr                         shift and go to state 49
+    PrimExpr                       shift and go to state 50
+
+state 34
+
+    (32) Comando -> NOVALINHA . SEMICOLON
+
+    SEMICOLON       shift and go to state 70
+
+
+state 35
+
+    (33) Comando -> SE . LPAREN Expr RPAREN ENTAO Comando
+    (34) Comando -> SE . LPAREN Expr RPAREN ENTAO Comando SENAO Comando
+
+    LPAREN          shift and go to state 71
+
+
+state 36
+
+    (72) PrimExpr -> LPAREN . Expr RPAREN
+    (37) Expr -> . AssignExpr
+    (38) AssignExpr -> . CondExpr
+    (39) AssignExpr -> . LValueExpr ASSIGN AssignExpr
+    (40) CondExpr -> . OrExpr
+    (41) CondExpr -> . OrExpr INTERROGATION Expr COLON CondExpr
+    (64) LValueExpr -> . ID LCOLC Expr RCOLC
+    (65) LValueExpr -> . ID
+    (42) OrExpr -> . OrExpr OU AndExpr
+    (43) OrExpr -> . AndExpr
+    (44) AndExpr -> . AndExpr E EqExpr
+    (45) AndExpr -> . EqExpr
+    (46) EqExpr -> . EqExpr EQUALS DesigExpr
+    (47) EqExpr -> . EqExpr DIFF DesigExpr
+    (48) EqExpr -> . DesigExpr
+    (49) DesigExpr -> . DesigExpr MENOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (51) DesigExpr -> . DesigExpr MAIOREQUALS AddExpr
+    (52) DesigExpr -> . DesigExpr MENOREQUALS AddExpr
+    (53) DesigExpr -> . AddExpr
+    (54) AddExpr -> . AddExpr PLUS MulExpr
+    (55) AddExpr -> . AddExpr MINUS MulExpr
+    (56) AddExpr -> . MulExpr
+    (57) MulExpr -> . MulExpr TIMES UnExpr
+    (58) MulExpr -> . MulExpr DIVIDE UnExpr
+    (59) MulExpr -> . MulExpr MOD UnExpr
+    (60) MulExpr -> . UnExpr
+    (61) UnExpr -> . MINUS PrimExpr
+    (62) UnExpr -> . EXPLAMATION PrimExpr
+    (63) UnExpr -> . PrimExpr
+    (66) PrimExpr -> . ID LPAREN ListExpr RPAREN
+    (67) PrimExpr -> . ID LPAREN RPAREN
+    (68) PrimExpr -> . ID LCOLC Expr RCOLC
+    (69) PrimExpr -> . ID
+    (70) PrimExpr -> . CONSTSTRING
+    (71) PrimExpr -> . NUMBER
+    (72) PrimExpr -> . LPAREN Expr RPAREN
+
+    ID              shift and go to state 42
+    MINUS           shift and go to state 48
+    EXPLAMATION     shift and go to state 51
+    CONSTSTRING     shift and go to state 52
+    NUMBER          shift and go to state 53
+    LPAREN          shift and go to state 36
+
+    Expr                           shift and go to state 72
+    AssignExpr                     shift and go to state 39
+    CondExpr                       shift and go to state 40
+    LValueExpr                     shift and go to state 32
+    OrExpr                         shift and go to state 41
+    AndExpr                        shift and go to state 43
+    EqExpr                         shift and go to state 44
+    DesigExpr                      shift and go to state 45
+    AddExpr                        shift and go to state 46
+    MulExpr                        shift and go to state 47
+    UnExpr                         shift and go to state 49
+    PrimExpr                       shift and go to state 50
+
+state 37
+
+    (35) Comando -> ENQUANTO . LPAREN Expr RPAREN EXECUTE Comando
+
+    LPAREN          shift and go to state 73
+
+
+state 38
+
+    (36) Comando -> Bloco .
+
+    SEMICOLON       reduce using rule 36 (Comando -> Bloco .)
+    RETORNE         reduce using rule 36 (Comando -> Bloco .)
+    LEIA            reduce using rule 36 (Comando -> Bloco .)
+    ESCREVA         reduce using rule 36 (Comando -> Bloco .)
+    NOVALINHA       reduce using rule 36 (Comando -> Bloco .)
+    SE              reduce using rule 36 (Comando -> Bloco .)
+    ENQUANTO        reduce using rule 36 (Comando -> Bloco .)
+    LBRACE          reduce using rule 36 (Comando -> Bloco .)
+    ID              reduce using rule 36 (Comando -> Bloco .)
+    MINUS           reduce using rule 36 (Comando -> Bloco .)
+    EXPLAMATION     reduce using rule 36 (Comando -> Bloco .)
+    CONSTSTRING     reduce using rule 36 (Comando -> Bloco .)
+    NUMBER          reduce using rule 36 (Comando -> Bloco .)
+    LPAREN          reduce using rule 36 (Comando -> Bloco .)
+    RBRACE          reduce using rule 36 (Comando -> Bloco .)
+    SENAO           reduce using rule 36 (Comando -> Bloco .)
+
+
+state 39
+
+    (37) Expr -> AssignExpr .
+
+    SEMICOLON       reduce using rule 37 (Expr -> AssignExpr .)
+    RPAREN          reduce using rule 37 (Expr -> AssignExpr .)
+    COLON           reduce using rule 37 (Expr -> AssignExpr .)
+    RCOLC           reduce using rule 37 (Expr -> AssignExpr .)
+
+
+state 40
+
+    (38) AssignExpr -> CondExpr .
+
+    SEMICOLON       reduce using rule 38 (AssignExpr -> CondExpr .)
+    RPAREN          reduce using rule 38 (AssignExpr -> CondExpr .)
+    COLON           reduce using rule 38 (AssignExpr -> CondExpr .)
+    RCOLC           reduce using rule 38 (AssignExpr -> CondExpr .)
+    COMMA           reduce using rule 38 (AssignExpr -> CondExpr .)
+
+
+state 41
+
+    (40) CondExpr -> OrExpr .
+    (41) CondExpr -> OrExpr . INTERROGATION Expr COLON CondExpr
+    (42) OrExpr -> OrExpr . OU AndExpr
+
+    SEMICOLON       reduce using rule 40 (CondExpr -> OrExpr .)
+    RPAREN          reduce using rule 40 (CondExpr -> OrExpr .)
+    COLON           reduce using rule 40 (CondExpr -> OrExpr .)
+    RCOLC           reduce using rule 40 (CondExpr -> OrExpr .)
+    COMMA           reduce using rule 40 (CondExpr -> OrExpr .)
+    INTERROGATION   shift and go to state 74
+    OU              shift and go to state 75
+
+
+state 42
+
+    (64) LValueExpr -> ID . LCOLC Expr RCOLC
+    (65) LValueExpr -> ID .
+    (66) PrimExpr -> ID . LPAREN ListExpr RPAREN
+    (67) PrimExpr -> ID . LPAREN RPAREN
+    (68) PrimExpr -> ID . LCOLC Expr RCOLC
+    (69) PrimExpr -> ID .
+
+    LCOLC           shift and go to state 76
+    ASSIGN          reduce using rule 65 (LValueExpr -> ID .)
+    LPAREN          shift and go to state 77
+    TIMES           reduce using rule 69 (PrimExpr -> ID .)
+    DIVIDE          reduce using rule 69 (PrimExpr -> ID .)
+    MOD             reduce using rule 69 (PrimExpr -> ID .)
+    PLUS            reduce using rule 69 (PrimExpr -> ID .)
+    MINUS           reduce using rule 69 (PrimExpr -> ID .)
+    MENOR           reduce using rule 69 (PrimExpr -> ID .)
+    MAIOR           reduce using rule 69 (PrimExpr -> ID .)
+    MAIOREQUALS     reduce using rule 69 (PrimExpr -> ID .)
+    MENOREQUALS     reduce using rule 69 (PrimExpr -> ID .)
+    EQUALS          reduce using rule 69 (PrimExpr -> ID .)
+    DIFF            reduce using rule 69 (PrimExpr -> ID .)
+    E               reduce using rule 69 (PrimExpr -> ID .)
+    INTERROGATION   reduce using rule 69 (PrimExpr -> ID .)
+    OU              reduce using rule 69 (PrimExpr -> ID .)
+    SEMICOLON       reduce using rule 69 (PrimExpr -> ID .)
+    RPAREN          reduce using rule 69 (PrimExpr -> ID .)
+    COLON           reduce using rule 69 (PrimExpr -> ID .)
+    RCOLC           reduce using rule 69 (PrimExpr -> ID .)
+    COMMA           reduce using rule 69 (PrimExpr -> ID .)
+
+
+state 43
+
+    (43) OrExpr -> AndExpr .
+    (44) AndExpr -> AndExpr . E EqExpr
+
+    INTERROGATION   reduce using rule 43 (OrExpr -> AndExpr .)
+    OU              reduce using rule 43 (OrExpr -> AndExpr .)
+    SEMICOLON       reduce using rule 43 (OrExpr -> AndExpr .)
+    RPAREN          reduce using rule 43 (OrExpr -> AndExpr .)
+    COLON           reduce using rule 43 (OrExpr -> AndExpr .)
+    RCOLC           reduce using rule 43 (OrExpr -> AndExpr .)
+    COMMA           reduce using rule 43 (OrExpr -> AndExpr .)
+    E               shift and go to state 78
+
+
+state 44
+
+    (45) AndExpr -> EqExpr .
+    (46) EqExpr -> EqExpr . EQUALS DesigExpr
+    (47) EqExpr -> EqExpr . DIFF DesigExpr
+
+    E               reduce using rule 45 (AndExpr -> EqExpr .)
+    INTERROGATION   reduce using rule 45 (AndExpr -> EqExpr .)
+    OU              reduce using rule 45 (AndExpr -> EqExpr .)
+    SEMICOLON       reduce using rule 45 (AndExpr -> EqExpr .)
+    RPAREN          reduce using rule 45 (AndExpr -> EqExpr .)
+    COLON           reduce using rule 45 (AndExpr -> EqExpr .)
+    RCOLC           reduce using rule 45 (AndExpr -> EqExpr .)
+    COMMA           reduce using rule 45 (AndExpr -> EqExpr .)
+    EQUALS          shift and go to state 79
+    DIFF            shift and go to state 80
+
+
+state 45
+
+    (48) EqExpr -> DesigExpr .
+    (49) DesigExpr -> DesigExpr . MENOR AddExpr
+    (50) DesigExpr -> DesigExpr . MAIOR AddExpr
+    (51) DesigExpr -> DesigExpr . MAIOREQUALS AddExpr
+    (52) DesigExpr -> DesigExpr . MENOREQUALS AddExpr
+
+    EQUALS          reduce using rule 48 (EqExpr -> DesigExpr .)
+    DIFF            reduce using rule 48 (EqExpr -> DesigExpr .)
+    E               reduce using rule 48 (EqExpr -> DesigExpr .)
+    INTERROGATION   reduce using rule 48 (EqExpr -> DesigExpr .)
+    OU              reduce using rule 48 (EqExpr -> DesigExpr .)
+    SEMICOLON       reduce using rule 48 (EqExpr -> DesigExpr .)
+    RPAREN          reduce using rule 48 (EqExpr -> DesigExpr .)
+    COLON           reduce using rule 48 (EqExpr -> DesigExpr .)
+    RCOLC           reduce using rule 48 (EqExpr -> DesigExpr .)
+    COMMA           reduce using rule 48 (EqExpr -> DesigExpr .)
+    MENOR           shift and go to state 81
+    MAIOR           shift and go to state 82
+    MAIOREQUALS     shift and go to state 83
+    MENOREQUALS     shift and go to state 84
+
+
+state 46
+
+    (53) DesigExpr -> AddExpr .
+    (54) AddExpr -> AddExpr . PLUS MulExpr
+    (55) AddExpr -> AddExpr . MINUS MulExpr
+
+    MENOR           reduce using rule 53 (DesigExpr -> AddExpr .)
+    MAIOR           reduce using rule 53 (DesigExpr -> AddExpr .)
+    MAIOREQUALS     reduce using rule 53 (DesigExpr -> AddExpr .)
+    MENOREQUALS     reduce using rule 53 (DesigExpr -> AddExpr .)
+    EQUALS          reduce using rule 53 (DesigExpr -> AddExpr .)
+    DIFF            reduce using rule 53 (DesigExpr -> AddExpr .)
+    E               reduce using rule 53 (DesigExpr -> AddExpr .)
+    INTERROGATION   reduce using rule 53 (DesigExpr -> AddExpr .)
+    OU              reduce using rule 53 (DesigExpr -> AddExpr .)
+    SEMICOLON       reduce using rule 53 (DesigExpr -> AddExpr .)
+    RPAREN          reduce using rule 53 (DesigExpr -> AddExpr .)
+    COLON           reduce using rule 53 (DesigExpr -> AddExpr .)
+    RCOLC           reduce using rule 53 (DesigExpr -> AddExpr .)
+    COMMA           reduce using rule 53 (DesigExpr -> AddExpr .)
+    PLUS            shift and go to state 85
+    MINUS           shift and go to state 86
+
+
+state 47
+
+    (56) AddExpr -> MulExpr .
+    (57) MulExpr -> MulExpr . TIMES UnExpr
+    (58) MulExpr -> MulExpr . DIVIDE UnExpr
+    (59) MulExpr -> MulExpr . MOD UnExpr
+
+    PLUS            reduce using rule 56 (AddExpr -> MulExpr .)
+    MINUS           reduce using rule 56 (AddExpr -> MulExpr .)
+    MENOR           reduce using rule 56 (AddExpr -> MulExpr .)
+    MAIOR           reduce using rule 56 (AddExpr -> MulExpr .)
+    MAIOREQUALS     reduce using rule 56 (AddExpr -> MulExpr .)
+    MENOREQUALS     reduce using rule 56 (AddExpr -> MulExpr .)
+    EQUALS          reduce using rule 56 (AddExpr -> MulExpr .)
+    DIFF            reduce using rule 56 (AddExpr -> MulExpr .)
+    E               reduce using rule 56 (AddExpr -> MulExpr .)
+    INTERROGATION   reduce using rule 56 (AddExpr -> MulExpr .)
+    OU              reduce using rule 56 (AddExpr -> MulExpr .)
+    SEMICOLON       reduce using rule 56 (AddExpr -> MulExpr .)
+    RPAREN          reduce using rule 56 (AddExpr -> MulExpr .)
+    COLON           reduce using rule 56 (AddExpr -> MulExpr .)
+    RCOLC           reduce using rule 56 (AddExpr -> MulExpr .)
+    COMMA           reduce using rule 56 (AddExpr -> MulExpr .)
+    TIMES           shift and go to state 87
+    DIVIDE          shift and go to state 88
+    MOD             shift and go to state 89
+
+
+state 48
+
+    (61) UnExpr -> MINUS . PrimExpr
+    (66) PrimExpr -> . ID LPAREN ListExpr RPAREN
+    (67) PrimExpr -> . ID LPAREN RPAREN
+    (68) PrimExpr -> . ID LCOLC Expr RCOLC
+    (69) PrimExpr -> . ID
+    (70) PrimExpr -> . CONSTSTRING
+    (71) PrimExpr -> . NUMBER
+    (72) PrimExpr -> . LPAREN Expr RPAREN
+
+    ID              shift and go to state 91
+    CONSTSTRING     shift and go to state 52
+    NUMBER          shift and go to state 53
+    LPAREN          shift and go to state 36
+
+    PrimExpr                       shift and go to state 90
+
+state 49
+
+    (60) MulExpr -> UnExpr .
+
+    TIMES           reduce using rule 60 (MulExpr -> UnExpr .)
+    DIVIDE          reduce using rule 60 (MulExpr -> UnExpr .)
+    MOD             reduce using rule 60 (MulExpr -> UnExpr .)
+    PLUS            reduce using rule 60 (MulExpr -> UnExpr .)
+    MINUS           reduce using rule 60 (MulExpr -> UnExpr .)
+    MENOR           reduce using rule 60 (MulExpr -> UnExpr .)
+    MAIOR           reduce using rule 60 (MulExpr -> UnExpr .)
+    MAIOREQUALS     reduce using rule 60 (MulExpr -> UnExpr .)
+    MENOREQUALS     reduce using rule 60 (MulExpr -> UnExpr .)
+    EQUALS          reduce using rule 60 (MulExpr -> UnExpr .)
+    DIFF            reduce using rule 60 (MulExpr -> UnExpr .)
+    E               reduce using rule 60 (MulExpr -> UnExpr .)
+    INTERROGATION   reduce using rule 60 (MulExpr -> UnExpr .)
+    OU              reduce using rule 60 (MulExpr -> UnExpr .)
+    SEMICOLON       reduce using rule 60 (MulExpr -> UnExpr .)
+    RPAREN          reduce using rule 60 (MulExpr -> UnExpr .)
+    COLON           reduce using rule 60 (MulExpr -> UnExpr .)
+    RCOLC           reduce using rule 60 (MulExpr -> UnExpr .)
+    COMMA           reduce using rule 60 (MulExpr -> UnExpr .)
+
+
+state 50
+
+    (63) UnExpr -> PrimExpr .
+
+    TIMES           reduce using rule 63 (UnExpr -> PrimExpr .)
+    DIVIDE          reduce using rule 63 (UnExpr -> PrimExpr .)
+    MOD             reduce using rule 63 (UnExpr -> PrimExpr .)
+    PLUS            reduce using rule 63 (UnExpr -> PrimExpr .)
+    MINUS           reduce using rule 63 (UnExpr -> PrimExpr .)
+    MENOR           reduce using rule 63 (UnExpr -> PrimExpr .)
+    MAIOR           reduce using rule 63 (UnExpr -> PrimExpr .)
+    MAIOREQUALS     reduce using rule 63 (UnExpr -> PrimExpr .)
+    MENOREQUALS     reduce using rule 63 (UnExpr -> PrimExpr .)
+    EQUALS          reduce using rule 63 (UnExpr -> PrimExpr .)
+    DIFF            reduce using rule 63 (UnExpr -> PrimExpr .)
+    E               reduce using rule 63 (UnExpr -> PrimExpr .)
+    INTERROGATION   reduce using rule 63 (UnExpr -> PrimExpr .)
+    OU              reduce using rule 63 (UnExpr -> PrimExpr .)
+    SEMICOLON       reduce using rule 63 (UnExpr -> PrimExpr .)
+    RPAREN          reduce using rule 63 (UnExpr -> PrimExpr .)
+    COLON           reduce using rule 63 (UnExpr -> PrimExpr .)
+    RCOLC           reduce using rule 63 (UnExpr -> PrimExpr .)
+    COMMA           reduce using rule 63 (UnExpr -> PrimExpr .)
+
+
+state 51
+
+    (62) UnExpr -> EXPLAMATION . PrimExpr
+    (66) PrimExpr -> . ID LPAREN ListExpr RPAREN
+    (67) PrimExpr -> . ID LPAREN RPAREN
+    (68) PrimExpr -> . ID LCOLC Expr RCOLC
+    (69) PrimExpr -> . ID
+    (70) PrimExpr -> . CONSTSTRING
+    (71) PrimExpr -> . NUMBER
+    (72) PrimExpr -> . LPAREN Expr RPAREN
+
+    ID              shift and go to state 91
+    CONSTSTRING     shift and go to state 52
+    NUMBER          shift and go to state 53
+    LPAREN          shift and go to state 36
+
+    PrimExpr                       shift and go to state 92
+
+state 52
+
+    (70) PrimExpr -> CONSTSTRING .
+
+    TIMES           reduce using rule 70 (PrimExpr -> CONSTSTRING .)
+    DIVIDE          reduce using rule 70 (PrimExpr -> CONSTSTRING .)
+    MOD             reduce using rule 70 (PrimExpr -> CONSTSTRING .)
+    PLUS            reduce using rule 70 (PrimExpr -> CONSTSTRING .)
+    MINUS           reduce using rule 70 (PrimExpr -> CONSTSTRING .)
+    MENOR           reduce using rule 70 (PrimExpr -> CONSTSTRING .)
+    MAIOR           reduce using rule 70 (PrimExpr -> CONSTSTRING .)
+    MAIOREQUALS     reduce using rule 70 (PrimExpr -> CONSTSTRING .)
+    MENOREQUALS     reduce using rule 70 (PrimExpr -> CONSTSTRING .)
+    EQUALS          reduce using rule 70 (PrimExpr -> CONSTSTRING .)
+    DIFF            reduce using rule 70 (PrimExpr -> CONSTSTRING .)
+    E               reduce using rule 70 (PrimExpr -> CONSTSTRING .)
+    INTERROGATION   reduce using rule 70 (PrimExpr -> CONSTSTRING .)
+    OU              reduce using rule 70 (PrimExpr -> CONSTSTRING .)
+    SEMICOLON       reduce using rule 70 (PrimExpr -> CONSTSTRING .)
+    RPAREN          reduce using rule 70 (PrimExpr -> CONSTSTRING .)
+    COLON           reduce using rule 70 (PrimExpr -> CONSTSTRING .)
+    RCOLC           reduce using rule 70 (PrimExpr -> CONSTSTRING .)
+    COMMA           reduce using rule 70 (PrimExpr -> CONSTSTRING .)
+
+
+state 53
+
+    (71) PrimExpr -> NUMBER .
+
+    TIMES           reduce using rule 71 (PrimExpr -> NUMBER .)
+    DIVIDE          reduce using rule 71 (PrimExpr -> NUMBER .)
+    MOD             reduce using rule 71 (PrimExpr -> NUMBER .)
+    PLUS            reduce using rule 71 (PrimExpr -> NUMBER .)
+    MINUS           reduce using rule 71 (PrimExpr -> NUMBER .)
+    MENOR           reduce using rule 71 (PrimExpr -> NUMBER .)
+    MAIOR           reduce using rule 71 (PrimExpr -> NUMBER .)
+    MAIOREQUALS     reduce using rule 71 (PrimExpr -> NUMBER .)
+    MENOREQUALS     reduce using rule 71 (PrimExpr -> NUMBER .)
+    EQUALS          reduce using rule 71 (PrimExpr -> NUMBER .)
+    DIFF            reduce using rule 71 (PrimExpr -> NUMBER .)
+    E               reduce using rule 71 (PrimExpr -> NUMBER .)
+    INTERROGATION   reduce using rule 71 (PrimExpr -> NUMBER .)
+    OU              reduce using rule 71 (PrimExpr -> NUMBER .)
+    SEMICOLON       reduce using rule 71 (PrimExpr -> NUMBER .)
+    RPAREN          reduce using rule 71 (PrimExpr -> NUMBER .)
+    COLON           reduce using rule 71 (PrimExpr -> NUMBER .)
+    RCOLC           reduce using rule 71 (PrimExpr -> NUMBER .)
+    COMMA           reduce using rule 71 (PrimExpr -> NUMBER .)
+
+
+state 54
+
+    (20) ListaDeclVar -> Tipo ID . DeclVar SEMICOLON ListaDeclVar
+    (21) ListaDeclVar -> Tipo ID . LCOLC NUMBER RCOLC DeclVar SEMICOLON ListaDeclVar
+    (7) DeclVar -> . COMMA ID DeclVar
+    (8) DeclVar -> . COMMA ID LCOLC NUMBER RCOLC DeclVar
+    (9) DeclVar -> .
+
+    LCOLC           shift and go to state 94
+    COMMA           shift and go to state 14
+    SEMICOLON       reduce using rule 9 (DeclVar -> .)
+
+    DeclVar                        shift and go to state 93
+
+state 55
+
+    (2) DeclFuncVar -> Tipo ID DeclVar SEMICOLON DeclFuncVar .
+
+    PROGRAMA        reduce using rule 2 (DeclFuncVar -> Tipo ID DeclVar SEMICOLON DeclFuncVar .)
+
+
+state 56
+
+    (3) DeclFuncVar -> Tipo ID LCOLC NUMBER RCOLC . DeclVar SEMICOLON DeclFuncVar
+    (7) DeclVar -> . COMMA ID DeclVar
+    (8) DeclVar -> . COMMA ID LCOLC NUMBER RCOLC DeclVar
+    (9) DeclVar -> .
+
+    COMMA           shift and go to state 14
+    SEMICOLON       reduce using rule 9 (DeclVar -> .)
+
+    DeclVar                        shift and go to state 95
+
+state 57
+
+    (7) DeclVar -> COMMA ID DeclVar .
+
+    SEMICOLON       reduce using rule 7 (DeclVar -> COMMA ID DeclVar .)
+
+
+state 58
+
+    (8) DeclVar -> COMMA ID LCOLC . NUMBER RCOLC DeclVar
+
+    NUMBER          shift and go to state 96
+
+
+state 59
+
+    (10) DeclFunc -> LPAREN ListaParametros RPAREN . Bloco
+    (17) Bloco -> . LBRACE ListaDeclVar ListaComando RBRACE
+    (18) Bloco -> . LBRACE ListaDeclVar RBRACE
+
+    LBRACE          shift and go to state 10
+
+    Bloco                          shift and go to state 97
+
+state 60
+
+    (13) ListaParametrosCont -> Tipo ID .
+    (14) ListaParametrosCont -> Tipo ID . LCOLC RCOLC
+    (15) ListaParametrosCont -> Tipo ID . COMMA ListaParametrosCont
+    (16) ListaParametrosCont -> Tipo ID . LCOLC RCOLC COMMA ListaParametrosCont
+
+    RPAREN          reduce using rule 13 (ListaParametrosCont -> Tipo ID .)
+    LCOLC           shift and go to state 98
+    COMMA           shift and go to state 99
+
+
+state 61
+
+    (17) Bloco -> LBRACE ListaDeclVar ListaComando RBRACE .
+
+    $end            reduce using rule 17 (Bloco -> LBRACE ListaDeclVar ListaComando RBRACE .)
+    SEMICOLON       reduce using rule 17 (Bloco -> LBRACE ListaDeclVar ListaComando RBRACE .)
+    RETORNE         reduce using rule 17 (Bloco -> LBRACE ListaDeclVar ListaComando RBRACE .)
+    LEIA            reduce using rule 17 (Bloco -> LBRACE ListaDeclVar ListaComando RBRACE .)
+    ESCREVA         reduce using rule 17 (Bloco -> LBRACE ListaDeclVar ListaComando RBRACE .)
+    NOVALINHA       reduce using rule 17 (Bloco -> LBRACE ListaDeclVar ListaComando RBRACE .)
+    SE              reduce using rule 17 (Bloco -> LBRACE ListaDeclVar ListaComando RBRACE .)
+    ENQUANTO        reduce using rule 17 (Bloco -> LBRACE ListaDeclVar ListaComando RBRACE .)
+    LBRACE          reduce using rule 17 (Bloco -> LBRACE ListaDeclVar ListaComando RBRACE .)
+    ID              reduce using rule 17 (Bloco -> LBRACE ListaDeclVar ListaComando RBRACE .)
+    MINUS           reduce using rule 17 (Bloco -> LBRACE ListaDeclVar ListaComando RBRACE .)
+    EXPLAMATION     reduce using rule 17 (Bloco -> LBRACE ListaDeclVar ListaComando RBRACE .)
+    CONSTSTRING     reduce using rule 17 (Bloco -> LBRACE ListaDeclVar ListaComando RBRACE .)
+    NUMBER          reduce using rule 17 (Bloco -> LBRACE ListaDeclVar ListaComando RBRACE .)
+    LPAREN          reduce using rule 17 (Bloco -> LBRACE ListaDeclVar ListaComando RBRACE .)
+    RBRACE          reduce using rule 17 (Bloco -> LBRACE ListaDeclVar ListaComando RBRACE .)
+    INT             reduce using rule 17 (Bloco -> LBRACE ListaDeclVar ListaComando RBRACE .)
+    CAR             reduce using rule 17 (Bloco -> LBRACE ListaDeclVar ListaComando RBRACE .)
+    PROGRAMA        reduce using rule 17 (Bloco -> LBRACE ListaDeclVar ListaComando RBRACE .)
+    SENAO           reduce using rule 17 (Bloco -> LBRACE ListaDeclVar ListaComando RBRACE .)
+
+
+state 62
+
+    (25) ListaComando -> Comando ListaComando .
+
+    RBRACE          reduce using rule 25 (ListaComando -> Comando ListaComando .)
+
+
+state 63
+
+    (27) Comando -> Expr SEMICOLON .
+
+    SEMICOLON       reduce using rule 27 (Comando -> Expr SEMICOLON .)
+    RETORNE         reduce using rule 27 (Comando -> Expr SEMICOLON .)
+    LEIA            reduce using rule 27 (Comando -> Expr SEMICOLON .)
+    ESCREVA         reduce using rule 27 (Comando -> Expr SEMICOLON .)
+    NOVALINHA       reduce using rule 27 (Comando -> Expr SEMICOLON .)
+    SE              reduce using rule 27 (Comando -> Expr SEMICOLON .)
+    ENQUANTO        reduce using rule 27 (Comando -> Expr SEMICOLON .)
+    LBRACE          reduce using rule 27 (Comando -> Expr SEMICOLON .)
+    ID              reduce using rule 27 (Comando -> Expr SEMICOLON .)
+    MINUS           reduce using rule 27 (Comando -> Expr SEMICOLON .)
+    EXPLAMATION     reduce using rule 27 (Comando -> Expr SEMICOLON .)
+    CONSTSTRING     reduce using rule 27 (Comando -> Expr SEMICOLON .)
+    NUMBER          reduce using rule 27 (Comando -> Expr SEMICOLON .)
+    LPAREN          reduce using rule 27 (Comando -> Expr SEMICOLON .)
+    RBRACE          reduce using rule 27 (Comando -> Expr SEMICOLON .)
+    SENAO           reduce using rule 27 (Comando -> Expr SEMICOLON .)
+
+
+state 64
+
+    (28) Comando -> RETORNE Expr . SEMICOLON
+
+    SEMICOLON       shift and go to state 100
+
+
+state 65
+
+    (29) Comando -> LEIA LValueExpr . SEMICOLON
+
+    SEMICOLON       shift and go to state 101
+
+
+state 66
+
+    (64) LValueExpr -> ID . LCOLC Expr RCOLC
+    (65) LValueExpr -> ID .
+
+    LCOLC           shift and go to state 102
+    SEMICOLON       reduce using rule 65 (LValueExpr -> ID .)
+
+
+state 67
+
+    (39) AssignExpr -> LValueExpr ASSIGN . AssignExpr
+    (38) AssignExpr -> . CondExpr
+    (39) AssignExpr -> . LValueExpr ASSIGN AssignExpr
+    (40) CondExpr -> . OrExpr
+    (41) CondExpr -> . OrExpr INTERROGATION Expr COLON CondExpr
+    (64) LValueExpr -> . ID LCOLC Expr RCOLC
+    (65) LValueExpr -> . ID
+    (42) OrExpr -> . OrExpr OU AndExpr
+    (43) OrExpr -> . AndExpr
+    (44) AndExpr -> . AndExpr E EqExpr
+    (45) AndExpr -> . EqExpr
+    (46) EqExpr -> . EqExpr EQUALS DesigExpr
+    (47) EqExpr -> . EqExpr DIFF DesigExpr
+    (48) EqExpr -> . DesigExpr
+    (49) DesigExpr -> . DesigExpr MENOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (51) DesigExpr -> . DesigExpr MAIOREQUALS AddExpr
+    (52) DesigExpr -> . DesigExpr MENOREQUALS AddExpr
+    (53) DesigExpr -> . AddExpr
+    (54) AddExpr -> . AddExpr PLUS MulExpr
+    (55) AddExpr -> . AddExpr MINUS MulExpr
+    (56) AddExpr -> . MulExpr
+    (57) MulExpr -> . MulExpr TIMES UnExpr
+    (58) MulExpr -> . MulExpr DIVIDE UnExpr
+    (59) MulExpr -> . MulExpr MOD UnExpr
+    (60) MulExpr -> . UnExpr
+    (61) UnExpr -> . MINUS PrimExpr
+    (62) UnExpr -> . EXPLAMATION PrimExpr
+    (63) UnExpr -> . PrimExpr
+    (66) PrimExpr -> . ID LPAREN ListExpr RPAREN
+    (67) PrimExpr -> . ID LPAREN RPAREN
+    (68) PrimExpr -> . ID LCOLC Expr RCOLC
+    (69) PrimExpr -> . ID
+    (70) PrimExpr -> . CONSTSTRING
+    (71) PrimExpr -> . NUMBER
+    (72) PrimExpr -> . LPAREN Expr RPAREN
+
+    ID              shift and go to state 42
+    MINUS           shift and go to state 48
+    EXPLAMATION     shift and go to state 51
+    CONSTSTRING     shift and go to state 52
+    NUMBER          shift and go to state 53
+    LPAREN          shift and go to state 36
+
+    LValueExpr                     shift and go to state 32
+    AssignExpr                     shift and go to state 103
+    CondExpr                       shift and go to state 40
+    OrExpr                         shift and go to state 41
+    AndExpr                        shift and go to state 43
+    EqExpr                         shift and go to state 44
+    DesigExpr                      shift and go to state 45
+    AddExpr                        shift and go to state 46
+    MulExpr                        shift and go to state 47
+    UnExpr                         shift and go to state 49
+    PrimExpr                       shift and go to state 50
+
+state 68
+
+    (30) Comando -> ESCREVA Expr . SEMICOLON
+
+    SEMICOLON       shift and go to state 104
+
+
+state 69
+
+    (31) Comando -> ESCREVA NORMALSTRING . SEMICOLON
+
+    SEMICOLON       shift and go to state 105
+
+
+state 70
+
+    (32) Comando -> NOVALINHA SEMICOLON .
+
+    SEMICOLON       reduce using rule 32 (Comando -> NOVALINHA SEMICOLON .)
+    RETORNE         reduce using rule 32 (Comando -> NOVALINHA SEMICOLON .)
+    LEIA            reduce using rule 32 (Comando -> NOVALINHA SEMICOLON .)
+    ESCREVA         reduce using rule 32 (Comando -> NOVALINHA SEMICOLON .)
+    NOVALINHA       reduce using rule 32 (Comando -> NOVALINHA SEMICOLON .)
+    SE              reduce using rule 32 (Comando -> NOVALINHA SEMICOLON .)
+    ENQUANTO        reduce using rule 32 (Comando -> NOVALINHA SEMICOLON .)
+    LBRACE          reduce using rule 32 (Comando -> NOVALINHA SEMICOLON .)
+    ID              reduce using rule 32 (Comando -> NOVALINHA SEMICOLON .)
+    MINUS           reduce using rule 32 (Comando -> NOVALINHA SEMICOLON .)
+    EXPLAMATION     reduce using rule 32 (Comando -> NOVALINHA SEMICOLON .)
+    CONSTSTRING     reduce using rule 32 (Comando -> NOVALINHA SEMICOLON .)
+    NUMBER          reduce using rule 32 (Comando -> NOVALINHA SEMICOLON .)
+    LPAREN          reduce using rule 32 (Comando -> NOVALINHA SEMICOLON .)
+    RBRACE          reduce using rule 32 (Comando -> NOVALINHA SEMICOLON .)
+    SENAO           reduce using rule 32 (Comando -> NOVALINHA SEMICOLON .)
+
+
+state 71
+
+    (33) Comando -> SE LPAREN . Expr RPAREN ENTAO Comando
+    (34) Comando -> SE LPAREN . Expr RPAREN ENTAO Comando SENAO Comando
+    (37) Expr -> . AssignExpr
+    (38) AssignExpr -> . CondExpr
+    (39) AssignExpr -> . LValueExpr ASSIGN AssignExpr
+    (40) CondExpr -> . OrExpr
+    (41) CondExpr -> . OrExpr INTERROGATION Expr COLON CondExpr
+    (64) LValueExpr -> . ID LCOLC Expr RCOLC
+    (65) LValueExpr -> . ID
+    (42) OrExpr -> . OrExpr OU AndExpr
+    (43) OrExpr -> . AndExpr
+    (44) AndExpr -> . AndExpr E EqExpr
+    (45) AndExpr -> . EqExpr
+    (46) EqExpr -> . EqExpr EQUALS DesigExpr
+    (47) EqExpr -> . EqExpr DIFF DesigExpr
+    (48) EqExpr -> . DesigExpr
+    (49) DesigExpr -> . DesigExpr MENOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (51) DesigExpr -> . DesigExpr MAIOREQUALS AddExpr
+    (52) DesigExpr -> . DesigExpr MENOREQUALS AddExpr
+    (53) DesigExpr -> . AddExpr
+    (54) AddExpr -> . AddExpr PLUS MulExpr
+    (55) AddExpr -> . AddExpr MINUS MulExpr
+    (56) AddExpr -> . MulExpr
+    (57) MulExpr -> . MulExpr TIMES UnExpr
+    (58) MulExpr -> . MulExpr DIVIDE UnExpr
+    (59) MulExpr -> . MulExpr MOD UnExpr
+    (60) MulExpr -> . UnExpr
+    (61) UnExpr -> . MINUS PrimExpr
+    (62) UnExpr -> . EXPLAMATION PrimExpr
+    (63) UnExpr -> . PrimExpr
+    (66) PrimExpr -> . ID LPAREN ListExpr RPAREN
+    (67) PrimExpr -> . ID LPAREN RPAREN
+    (68) PrimExpr -> . ID LCOLC Expr RCOLC
+    (69) PrimExpr -> . ID
+    (70) PrimExpr -> . CONSTSTRING
+    (71) PrimExpr -> . NUMBER
+    (72) PrimExpr -> . LPAREN Expr RPAREN
+
+    ID              shift and go to state 42
+    MINUS           shift and go to state 48
+    EXPLAMATION     shift and go to state 51
+    CONSTSTRING     shift and go to state 52
+    NUMBER          shift and go to state 53
+    LPAREN          shift and go to state 36
+
+    Expr                           shift and go to state 106
+    AssignExpr                     shift and go to state 39
+    CondExpr                       shift and go to state 40
+    LValueExpr                     shift and go to state 32
+    OrExpr                         shift and go to state 41
+    AndExpr                        shift and go to state 43
+    EqExpr                         shift and go to state 44
+    DesigExpr                      shift and go to state 45
+    AddExpr                        shift and go to state 46
+    MulExpr                        shift and go to state 47
+    UnExpr                         shift and go to state 49
+    PrimExpr                       shift and go to state 50
+
+state 72
+
+    (72) PrimExpr -> LPAREN Expr . RPAREN
+
+    RPAREN          shift and go to state 107
+
+
+state 73
+
+    (35) Comando -> ENQUANTO LPAREN . Expr RPAREN EXECUTE Comando
+    (37) Expr -> . AssignExpr
+    (38) AssignExpr -> . CondExpr
+    (39) AssignExpr -> . LValueExpr ASSIGN AssignExpr
+    (40) CondExpr -> . OrExpr
+    (41) CondExpr -> . OrExpr INTERROGATION Expr COLON CondExpr
+    (64) LValueExpr -> . ID LCOLC Expr RCOLC
+    (65) LValueExpr -> . ID
+    (42) OrExpr -> . OrExpr OU AndExpr
+    (43) OrExpr -> . AndExpr
+    (44) AndExpr -> . AndExpr E EqExpr
+    (45) AndExpr -> . EqExpr
+    (46) EqExpr -> . EqExpr EQUALS DesigExpr
+    (47) EqExpr -> . EqExpr DIFF DesigExpr
+    (48) EqExpr -> . DesigExpr
+    (49) DesigExpr -> . DesigExpr MENOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (51) DesigExpr -> . DesigExpr MAIOREQUALS AddExpr
+    (52) DesigExpr -> . DesigExpr MENOREQUALS AddExpr
+    (53) DesigExpr -> . AddExpr
+    (54) AddExpr -> . AddExpr PLUS MulExpr
+    (55) AddExpr -> . AddExpr MINUS MulExpr
+    (56) AddExpr -> . MulExpr
+    (57) MulExpr -> . MulExpr TIMES UnExpr
+    (58) MulExpr -> . MulExpr DIVIDE UnExpr
+    (59) MulExpr -> . MulExpr MOD UnExpr
+    (60) MulExpr -> . UnExpr
+    (61) UnExpr -> . MINUS PrimExpr
+    (62) UnExpr -> . EXPLAMATION PrimExpr
+    (63) UnExpr -> . PrimExpr
+    (66) PrimExpr -> . ID LPAREN ListExpr RPAREN
+    (67) PrimExpr -> . ID LPAREN RPAREN
+    (68) PrimExpr -> . ID LCOLC Expr RCOLC
+    (69) PrimExpr -> . ID
+    (70) PrimExpr -> . CONSTSTRING
+    (71) PrimExpr -> . NUMBER
+    (72) PrimExpr -> . LPAREN Expr RPAREN
+
+    ID              shift and go to state 42
+    MINUS           shift and go to state 48
+    EXPLAMATION     shift and go to state 51
+    CONSTSTRING     shift and go to state 52
+    NUMBER          shift and go to state 53
+    LPAREN          shift and go to state 36
+
+    Expr                           shift and go to state 108
+    AssignExpr                     shift and go to state 39
+    CondExpr                       shift and go to state 40
+    LValueExpr                     shift and go to state 32
+    OrExpr                         shift and go to state 41
+    AndExpr                        shift and go to state 43
+    EqExpr                         shift and go to state 44
+    DesigExpr                      shift and go to state 45
+    AddExpr                        shift and go to state 46
+    MulExpr                        shift and go to state 47
+    UnExpr                         shift and go to state 49
+    PrimExpr                       shift and go to state 50
+
+state 74
+
+    (41) CondExpr -> OrExpr INTERROGATION . Expr COLON CondExpr
+    (37) Expr -> . AssignExpr
+    (38) AssignExpr -> . CondExpr
+    (39) AssignExpr -> . LValueExpr ASSIGN AssignExpr
+    (40) CondExpr -> . OrExpr
+    (41) CondExpr -> . OrExpr INTERROGATION Expr COLON CondExpr
+    (64) LValueExpr -> . ID LCOLC Expr RCOLC
+    (65) LValueExpr -> . ID
+    (42) OrExpr -> . OrExpr OU AndExpr
+    (43) OrExpr -> . AndExpr
+    (44) AndExpr -> . AndExpr E EqExpr
+    (45) AndExpr -> . EqExpr
+    (46) EqExpr -> . EqExpr EQUALS DesigExpr
+    (47) EqExpr -> . EqExpr DIFF DesigExpr
+    (48) EqExpr -> . DesigExpr
+    (49) DesigExpr -> . DesigExpr MENOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (51) DesigExpr -> . DesigExpr MAIOREQUALS AddExpr
+    (52) DesigExpr -> . DesigExpr MENOREQUALS AddExpr
+    (53) DesigExpr -> . AddExpr
+    (54) AddExpr -> . AddExpr PLUS MulExpr
+    (55) AddExpr -> . AddExpr MINUS MulExpr
+    (56) AddExpr -> . MulExpr
+    (57) MulExpr -> . MulExpr TIMES UnExpr
+    (58) MulExpr -> . MulExpr DIVIDE UnExpr
+    (59) MulExpr -> . MulExpr MOD UnExpr
+    (60) MulExpr -> . UnExpr
+    (61) UnExpr -> . MINUS PrimExpr
+    (62) UnExpr -> . EXPLAMATION PrimExpr
+    (63) UnExpr -> . PrimExpr
+    (66) PrimExpr -> . ID LPAREN ListExpr RPAREN
+    (67) PrimExpr -> . ID LPAREN RPAREN
+    (68) PrimExpr -> . ID LCOLC Expr RCOLC
+    (69) PrimExpr -> . ID
+    (70) PrimExpr -> . CONSTSTRING
+    (71) PrimExpr -> . NUMBER
+    (72) PrimExpr -> . LPAREN Expr RPAREN
+
+    ID              shift and go to state 42
+    MINUS           shift and go to state 48
+    EXPLAMATION     shift and go to state 51
+    CONSTSTRING     shift and go to state 52
+    NUMBER          shift and go to state 53
+    LPAREN          shift and go to state 36
+
+    OrExpr                         shift and go to state 41
+    Expr                           shift and go to state 109
+    CondExpr                       shift and go to state 40
+    AssignExpr                     shift and go to state 39
+    LValueExpr                     shift and go to state 32
+    AndExpr                        shift and go to state 43
+    EqExpr                         shift and go to state 44
+    DesigExpr                      shift and go to state 45
+    AddExpr                        shift and go to state 46
+    MulExpr                        shift and go to state 47
+    UnExpr                         shift and go to state 49
+    PrimExpr                       shift and go to state 50
+
+state 75
+
+    (42) OrExpr -> OrExpr OU . AndExpr
+    (44) AndExpr -> . AndExpr E EqExpr
+    (45) AndExpr -> . EqExpr
+    (46) EqExpr -> . EqExpr EQUALS DesigExpr
+    (47) EqExpr -> . EqExpr DIFF DesigExpr
+    (48) EqExpr -> . DesigExpr
+    (49) DesigExpr -> . DesigExpr MENOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (51) DesigExpr -> . DesigExpr MAIOREQUALS AddExpr
+    (52) DesigExpr -> . DesigExpr MENOREQUALS AddExpr
+    (53) DesigExpr -> . AddExpr
+    (54) AddExpr -> . AddExpr PLUS MulExpr
+    (55) AddExpr -> . AddExpr MINUS MulExpr
+    (56) AddExpr -> . MulExpr
+    (57) MulExpr -> . MulExpr TIMES UnExpr
+    (58) MulExpr -> . MulExpr DIVIDE UnExpr
+    (59) MulExpr -> . MulExpr MOD UnExpr
+    (60) MulExpr -> . UnExpr
+    (61) UnExpr -> . MINUS PrimExpr
+    (62) UnExpr -> . EXPLAMATION PrimExpr
+    (63) UnExpr -> . PrimExpr
+    (66) PrimExpr -> . ID LPAREN ListExpr RPAREN
+    (67) PrimExpr -> . ID LPAREN RPAREN
+    (68) PrimExpr -> . ID LCOLC Expr RCOLC
+    (69) PrimExpr -> . ID
+    (70) PrimExpr -> . CONSTSTRING
+    (71) PrimExpr -> . NUMBER
+    (72) PrimExpr -> . LPAREN Expr RPAREN
+
+    MINUS           shift and go to state 48
+    EXPLAMATION     shift and go to state 51
+    ID              shift and go to state 91
+    CONSTSTRING     shift and go to state 52
+    NUMBER          shift and go to state 53
+    LPAREN          shift and go to state 36
+
+    AndExpr                        shift and go to state 110
+    EqExpr                         shift and go to state 44
+    DesigExpr                      shift and go to state 45
+    AddExpr                        shift and go to state 46
+    MulExpr                        shift and go to state 47
+    UnExpr                         shift and go to state 49
+    PrimExpr                       shift and go to state 50
+
+state 76
+
+    (64) LValueExpr -> ID LCOLC . Expr RCOLC
+    (68) PrimExpr -> ID LCOLC . Expr RCOLC
+    (37) Expr -> . AssignExpr
+    (38) AssignExpr -> . CondExpr
+    (39) AssignExpr -> . LValueExpr ASSIGN AssignExpr
+    (40) CondExpr -> . OrExpr
+    (41) CondExpr -> . OrExpr INTERROGATION Expr COLON CondExpr
+    (64) LValueExpr -> . ID LCOLC Expr RCOLC
+    (65) LValueExpr -> . ID
+    (42) OrExpr -> . OrExpr OU AndExpr
+    (43) OrExpr -> . AndExpr
+    (44) AndExpr -> . AndExpr E EqExpr
+    (45) AndExpr -> . EqExpr
+    (46) EqExpr -> . EqExpr EQUALS DesigExpr
+    (47) EqExpr -> . EqExpr DIFF DesigExpr
+    (48) EqExpr -> . DesigExpr
+    (49) DesigExpr -> . DesigExpr MENOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (51) DesigExpr -> . DesigExpr MAIOREQUALS AddExpr
+    (52) DesigExpr -> . DesigExpr MENOREQUALS AddExpr
+    (53) DesigExpr -> . AddExpr
+    (54) AddExpr -> . AddExpr PLUS MulExpr
+    (55) AddExpr -> . AddExpr MINUS MulExpr
+    (56) AddExpr -> . MulExpr
+    (57) MulExpr -> . MulExpr TIMES UnExpr
+    (58) MulExpr -> . MulExpr DIVIDE UnExpr
+    (59) MulExpr -> . MulExpr MOD UnExpr
+    (60) MulExpr -> . UnExpr
+    (61) UnExpr -> . MINUS PrimExpr
+    (62) UnExpr -> . EXPLAMATION PrimExpr
+    (63) UnExpr -> . PrimExpr
+    (66) PrimExpr -> . ID LPAREN ListExpr RPAREN
+    (67) PrimExpr -> . ID LPAREN RPAREN
+    (68) PrimExpr -> . ID LCOLC Expr RCOLC
+    (69) PrimExpr -> . ID
+    (70) PrimExpr -> . CONSTSTRING
+    (71) PrimExpr -> . NUMBER
+    (72) PrimExpr -> . LPAREN Expr RPAREN
+
+    ID              shift and go to state 42
+    MINUS           shift and go to state 48
+    EXPLAMATION     shift and go to state 51
+    CONSTSTRING     shift and go to state 52
+    NUMBER          shift and go to state 53
+    LPAREN          shift and go to state 36
+
+    Expr                           shift and go to state 111
+    AssignExpr                     shift and go to state 39
+    CondExpr                       shift and go to state 40
+    LValueExpr                     shift and go to state 32
+    OrExpr                         shift and go to state 41
+    AndExpr                        shift and go to state 43
+    EqExpr                         shift and go to state 44
+    DesigExpr                      shift and go to state 45
+    AddExpr                        shift and go to state 46
+    MulExpr                        shift and go to state 47
+    UnExpr                         shift and go to state 49
+    PrimExpr                       shift and go to state 50
+
+state 77
+
+    (66) PrimExpr -> ID LPAREN . ListExpr RPAREN
+    (67) PrimExpr -> ID LPAREN . RPAREN
+    (73) ListExpr -> . AssignExpr
+    (74) ListExpr -> . ListExpr COMMA AssignExpr
+    (38) AssignExpr -> . CondExpr
+    (39) AssignExpr -> . LValueExpr ASSIGN AssignExpr
+    (40) CondExpr -> . OrExpr
+    (41) CondExpr -> . OrExpr INTERROGATION Expr COLON CondExpr
+    (64) LValueExpr -> . ID LCOLC Expr RCOLC
+    (65) LValueExpr -> . ID
+    (42) OrExpr -> . OrExpr OU AndExpr
+    (43) OrExpr -> . AndExpr
+    (44) AndExpr -> . AndExpr E EqExpr
+    (45) AndExpr -> . EqExpr
+    (46) EqExpr -> . EqExpr EQUALS DesigExpr
+    (47) EqExpr -> . EqExpr DIFF DesigExpr
+    (48) EqExpr -> . DesigExpr
+    (49) DesigExpr -> . DesigExpr MENOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (51) DesigExpr -> . DesigExpr MAIOREQUALS AddExpr
+    (52) DesigExpr -> . DesigExpr MENOREQUALS AddExpr
+    (53) DesigExpr -> . AddExpr
+    (54) AddExpr -> . AddExpr PLUS MulExpr
+    (55) AddExpr -> . AddExpr MINUS MulExpr
+    (56) AddExpr -> . MulExpr
+    (57) MulExpr -> . MulExpr TIMES UnExpr
+    (58) MulExpr -> . MulExpr DIVIDE UnExpr
+    (59) MulExpr -> . MulExpr MOD UnExpr
+    (60) MulExpr -> . UnExpr
+    (61) UnExpr -> . MINUS PrimExpr
+    (62) UnExpr -> . EXPLAMATION PrimExpr
+    (63) UnExpr -> . PrimExpr
+    (66) PrimExpr -> . ID LPAREN ListExpr RPAREN
+    (67) PrimExpr -> . ID LPAREN RPAREN
+    (68) PrimExpr -> . ID LCOLC Expr RCOLC
+    (69) PrimExpr -> . ID
+    (70) PrimExpr -> . CONSTSTRING
+    (71) PrimExpr -> . NUMBER
+    (72) PrimExpr -> . LPAREN Expr RPAREN
+
+    RPAREN          shift and go to state 113
+    ID              shift and go to state 42
+    MINUS           shift and go to state 48
+    EXPLAMATION     shift and go to state 51
+    CONSTSTRING     shift and go to state 52
+    NUMBER          shift and go to state 53
+    LPAREN          shift and go to state 36
+
+    ListExpr                       shift and go to state 112
+    AssignExpr                     shift and go to state 114
+    CondExpr                       shift and go to state 40
+    LValueExpr                     shift and go to state 32
+    OrExpr                         shift and go to state 41
+    AndExpr                        shift and go to state 43
+    EqExpr                         shift and go to state 44
+    DesigExpr                      shift and go to state 45
+    AddExpr                        shift and go to state 46
+    MulExpr                        shift and go to state 47
+    UnExpr                         shift and go to state 49
+    PrimExpr                       shift and go to state 50
+
+state 78
+
+    (44) AndExpr -> AndExpr E . EqExpr
+    (46) EqExpr -> . EqExpr EQUALS DesigExpr
+    (47) EqExpr -> . EqExpr DIFF DesigExpr
+    (48) EqExpr -> . DesigExpr
+    (49) DesigExpr -> . DesigExpr MENOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (51) DesigExpr -> . DesigExpr MAIOREQUALS AddExpr
+    (52) DesigExpr -> . DesigExpr MENOREQUALS AddExpr
+    (53) DesigExpr -> . AddExpr
+    (54) AddExpr -> . AddExpr PLUS MulExpr
+    (55) AddExpr -> . AddExpr MINUS MulExpr
+    (56) AddExpr -> . MulExpr
+    (57) MulExpr -> . MulExpr TIMES UnExpr
+    (58) MulExpr -> . MulExpr DIVIDE UnExpr
+    (59) MulExpr -> . MulExpr MOD UnExpr
+    (60) MulExpr -> . UnExpr
+    (61) UnExpr -> . MINUS PrimExpr
+    (62) UnExpr -> . EXPLAMATION PrimExpr
+    (63) UnExpr -> . PrimExpr
+    (66) PrimExpr -> . ID LPAREN ListExpr RPAREN
+    (67) PrimExpr -> . ID LPAREN RPAREN
+    (68) PrimExpr -> . ID LCOLC Expr RCOLC
+    (69) PrimExpr -> . ID
+    (70) PrimExpr -> . CONSTSTRING
+    (71) PrimExpr -> . NUMBER
+    (72) PrimExpr -> . LPAREN Expr RPAREN
+
+    MINUS           shift and go to state 48
+    EXPLAMATION     shift and go to state 51
+    ID              shift and go to state 91
+    CONSTSTRING     shift and go to state 52
+    NUMBER          shift and go to state 53
+    LPAREN          shift and go to state 36
+
+    EqExpr                         shift and go to state 115
+    DesigExpr                      shift and go to state 45
+    AddExpr                        shift and go to state 46
+    MulExpr                        shift and go to state 47
+    UnExpr                         shift and go to state 49
+    PrimExpr                       shift and go to state 50
+
+state 79
+
+    (46) EqExpr -> EqExpr EQUALS . DesigExpr
+    (49) DesigExpr -> . DesigExpr MENOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (51) DesigExpr -> . DesigExpr MAIOREQUALS AddExpr
+    (52) DesigExpr -> . DesigExpr MENOREQUALS AddExpr
+    (53) DesigExpr -> . AddExpr
+    (54) AddExpr -> . AddExpr PLUS MulExpr
+    (55) AddExpr -> . AddExpr MINUS MulExpr
+    (56) AddExpr -> . MulExpr
+    (57) MulExpr -> . MulExpr TIMES UnExpr
+    (58) MulExpr -> . MulExpr DIVIDE UnExpr
+    (59) MulExpr -> . MulExpr MOD UnExpr
+    (60) MulExpr -> . UnExpr
+    (61) UnExpr -> . MINUS PrimExpr
+    (62) UnExpr -> . EXPLAMATION PrimExpr
+    (63) UnExpr -> . PrimExpr
+    (66) PrimExpr -> . ID LPAREN ListExpr RPAREN
+    (67) PrimExpr -> . ID LPAREN RPAREN
+    (68) PrimExpr -> . ID LCOLC Expr RCOLC
+    (69) PrimExpr -> . ID
+    (70) PrimExpr -> . CONSTSTRING
+    (71) PrimExpr -> . NUMBER
+    (72) PrimExpr -> . LPAREN Expr RPAREN
+
+    MINUS           shift and go to state 48
+    EXPLAMATION     shift and go to state 51
+    ID              shift and go to state 91
+    CONSTSTRING     shift and go to state 52
+    NUMBER          shift and go to state 53
+    LPAREN          shift and go to state 36
+
+    DesigExpr                      shift and go to state 116
+    AddExpr                        shift and go to state 46
+    MulExpr                        shift and go to state 47
+    UnExpr                         shift and go to state 49
+    PrimExpr                       shift and go to state 50
+
+state 80
+
+    (47) EqExpr -> EqExpr DIFF . DesigExpr
+    (49) DesigExpr -> . DesigExpr MENOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (51) DesigExpr -> . DesigExpr MAIOREQUALS AddExpr
+    (52) DesigExpr -> . DesigExpr MENOREQUALS AddExpr
+    (53) DesigExpr -> . AddExpr
+    (54) AddExpr -> . AddExpr PLUS MulExpr
+    (55) AddExpr -> . AddExpr MINUS MulExpr
+    (56) AddExpr -> . MulExpr
+    (57) MulExpr -> . MulExpr TIMES UnExpr
+    (58) MulExpr -> . MulExpr DIVIDE UnExpr
+    (59) MulExpr -> . MulExpr MOD UnExpr
+    (60) MulExpr -> . UnExpr
+    (61) UnExpr -> . MINUS PrimExpr
+    (62) UnExpr -> . EXPLAMATION PrimExpr
+    (63) UnExpr -> . PrimExpr
+    (66) PrimExpr -> . ID LPAREN ListExpr RPAREN
+    (67) PrimExpr -> . ID LPAREN RPAREN
+    (68) PrimExpr -> . ID LCOLC Expr RCOLC
+    (69) PrimExpr -> . ID
+    (70) PrimExpr -> . CONSTSTRING
+    (71) PrimExpr -> . NUMBER
+    (72) PrimExpr -> . LPAREN Expr RPAREN
+
+    MINUS           shift and go to state 48
+    EXPLAMATION     shift and go to state 51
+    ID              shift and go to state 91
+    CONSTSTRING     shift and go to state 52
+    NUMBER          shift and go to state 53
+    LPAREN          shift and go to state 36
+
+    DesigExpr                      shift and go to state 117
+    AddExpr                        shift and go to state 46
+    MulExpr                        shift and go to state 47
+    UnExpr                         shift and go to state 49
+    PrimExpr                       shift and go to state 50
+
+state 81
+
+    (49) DesigExpr -> DesigExpr MENOR . AddExpr
+    (54) AddExpr -> . AddExpr PLUS MulExpr
+    (55) AddExpr -> . AddExpr MINUS MulExpr
+    (56) AddExpr -> . MulExpr
+    (57) MulExpr -> . MulExpr TIMES UnExpr
+    (58) MulExpr -> . MulExpr DIVIDE UnExpr
+    (59) MulExpr -> . MulExpr MOD UnExpr
+    (60) MulExpr -> . UnExpr
+    (61) UnExpr -> . MINUS PrimExpr
+    (62) UnExpr -> . EXPLAMATION PrimExpr
+    (63) UnExpr -> . PrimExpr
+    (66) PrimExpr -> . ID LPAREN ListExpr RPAREN
+    (67) PrimExpr -> . ID LPAREN RPAREN
+    (68) PrimExpr -> . ID LCOLC Expr RCOLC
+    (69) PrimExpr -> . ID
+    (70) PrimExpr -> . CONSTSTRING
+    (71) PrimExpr -> . NUMBER
+    (72) PrimExpr -> . LPAREN Expr RPAREN
+
+    MINUS           shift and go to state 48
+    EXPLAMATION     shift and go to state 51
+    ID              shift and go to state 91
+    CONSTSTRING     shift and go to state 52
+    NUMBER          shift and go to state 53
+    LPAREN          shift and go to state 36
+
+    AddExpr                        shift and go to state 118
+    MulExpr                        shift and go to state 47
+    UnExpr                         shift and go to state 49
+    PrimExpr                       shift and go to state 50
+
+state 82
+
+    (50) DesigExpr -> DesigExpr MAIOR . AddExpr
+    (54) AddExpr -> . AddExpr PLUS MulExpr
+    (55) AddExpr -> . AddExpr MINUS MulExpr
+    (56) AddExpr -> . MulExpr
+    (57) MulExpr -> . MulExpr TIMES UnExpr
+    (58) MulExpr -> . MulExpr DIVIDE UnExpr
+    (59) MulExpr -> . MulExpr MOD UnExpr
+    (60) MulExpr -> . UnExpr
+    (61) UnExpr -> . MINUS PrimExpr
+    (62) UnExpr -> . EXPLAMATION PrimExpr
+    (63) UnExpr -> . PrimExpr
+    (66) PrimExpr -> . ID LPAREN ListExpr RPAREN
+    (67) PrimExpr -> . ID LPAREN RPAREN
+    (68) PrimExpr -> . ID LCOLC Expr RCOLC
+    (69) PrimExpr -> . ID
+    (70) PrimExpr -> . CONSTSTRING
+    (71) PrimExpr -> . NUMBER
+    (72) PrimExpr -> . LPAREN Expr RPAREN
+
+    MINUS           shift and go to state 48
+    EXPLAMATION     shift and go to state 51
+    ID              shift and go to state 91
+    CONSTSTRING     shift and go to state 52
+    NUMBER          shift and go to state 53
+    LPAREN          shift and go to state 36
+
+    AddExpr                        shift and go to state 119
+    MulExpr                        shift and go to state 47
+    UnExpr                         shift and go to state 49
+    PrimExpr                       shift and go to state 50
+
+state 83
+
+    (51) DesigExpr -> DesigExpr MAIOREQUALS . AddExpr
+    (54) AddExpr -> . AddExpr PLUS MulExpr
+    (55) AddExpr -> . AddExpr MINUS MulExpr
+    (56) AddExpr -> . MulExpr
+    (57) MulExpr -> . MulExpr TIMES UnExpr
+    (58) MulExpr -> . MulExpr DIVIDE UnExpr
+    (59) MulExpr -> . MulExpr MOD UnExpr
+    (60) MulExpr -> . UnExpr
+    (61) UnExpr -> . MINUS PrimExpr
+    (62) UnExpr -> . EXPLAMATION PrimExpr
+    (63) UnExpr -> . PrimExpr
+    (66) PrimExpr -> . ID LPAREN ListExpr RPAREN
+    (67) PrimExpr -> . ID LPAREN RPAREN
+    (68) PrimExpr -> . ID LCOLC Expr RCOLC
+    (69) PrimExpr -> . ID
+    (70) PrimExpr -> . CONSTSTRING
+    (71) PrimExpr -> . NUMBER
+    (72) PrimExpr -> . LPAREN Expr RPAREN
+
+    MINUS           shift and go to state 48
+    EXPLAMATION     shift and go to state 51
+    ID              shift and go to state 91
+    CONSTSTRING     shift and go to state 52
+    NUMBER          shift and go to state 53
+    LPAREN          shift and go to state 36
+
+    AddExpr                        shift and go to state 120
+    MulExpr                        shift and go to state 47
+    UnExpr                         shift and go to state 49
+    PrimExpr                       shift and go to state 50
+
+state 84
+
+    (52) DesigExpr -> DesigExpr MENOREQUALS . AddExpr
+    (54) AddExpr -> . AddExpr PLUS MulExpr
+    (55) AddExpr -> . AddExpr MINUS MulExpr
+    (56) AddExpr -> . MulExpr
+    (57) MulExpr -> . MulExpr TIMES UnExpr
+    (58) MulExpr -> . MulExpr DIVIDE UnExpr
+    (59) MulExpr -> . MulExpr MOD UnExpr
+    (60) MulExpr -> . UnExpr
+    (61) UnExpr -> . MINUS PrimExpr
+    (62) UnExpr -> . EXPLAMATION PrimExpr
+    (63) UnExpr -> . PrimExpr
+    (66) PrimExpr -> . ID LPAREN ListExpr RPAREN
+    (67) PrimExpr -> . ID LPAREN RPAREN
+    (68) PrimExpr -> . ID LCOLC Expr RCOLC
+    (69) PrimExpr -> . ID
+    (70) PrimExpr -> . CONSTSTRING
+    (71) PrimExpr -> . NUMBER
+    (72) PrimExpr -> . LPAREN Expr RPAREN
+
+    MINUS           shift and go to state 48
+    EXPLAMATION     shift and go to state 51
+    ID              shift and go to state 91
+    CONSTSTRING     shift and go to state 52
+    NUMBER          shift and go to state 53
+    LPAREN          shift and go to state 36
+
+    AddExpr                        shift and go to state 121
+    MulExpr                        shift and go to state 47
+    UnExpr                         shift and go to state 49
+    PrimExpr                       shift and go to state 50
+
+state 85
+
+    (54) AddExpr -> AddExpr PLUS . MulExpr
+    (57) MulExpr -> . MulExpr TIMES UnExpr
+    (58) MulExpr -> . MulExpr DIVIDE UnExpr
+    (59) MulExpr -> . MulExpr MOD UnExpr
+    (60) MulExpr -> . UnExpr
+    (61) UnExpr -> . MINUS PrimExpr
+    (62) UnExpr -> . EXPLAMATION PrimExpr
+    (63) UnExpr -> . PrimExpr
+    (66) PrimExpr -> . ID LPAREN ListExpr RPAREN
+    (67) PrimExpr -> . ID LPAREN RPAREN
+    (68) PrimExpr -> . ID LCOLC Expr RCOLC
+    (69) PrimExpr -> . ID
+    (70) PrimExpr -> . CONSTSTRING
+    (71) PrimExpr -> . NUMBER
+    (72) PrimExpr -> . LPAREN Expr RPAREN
+
+    MINUS           shift and go to state 48
+    EXPLAMATION     shift and go to state 51
+    ID              shift and go to state 91
+    CONSTSTRING     shift and go to state 52
+    NUMBER          shift and go to state 53
+    LPAREN          shift and go to state 36
+
+    MulExpr                        shift and go to state 122
+    UnExpr                         shift and go to state 49
+    PrimExpr                       shift and go to state 50
+
+state 86
+
+    (55) AddExpr -> AddExpr MINUS . MulExpr
+    (57) MulExpr -> . MulExpr TIMES UnExpr
+    (58) MulExpr -> . MulExpr DIVIDE UnExpr
+    (59) MulExpr -> . MulExpr MOD UnExpr
+    (60) MulExpr -> . UnExpr
+    (61) UnExpr -> . MINUS PrimExpr
+    (62) UnExpr -> . EXPLAMATION PrimExpr
+    (63) UnExpr -> . PrimExpr
+    (66) PrimExpr -> . ID LPAREN ListExpr RPAREN
+    (67) PrimExpr -> . ID LPAREN RPAREN
+    (68) PrimExpr -> . ID LCOLC Expr RCOLC
+    (69) PrimExpr -> . ID
+    (70) PrimExpr -> . CONSTSTRING
+    (71) PrimExpr -> . NUMBER
+    (72) PrimExpr -> . LPAREN Expr RPAREN
+
+    MINUS           shift and go to state 48
+    EXPLAMATION     shift and go to state 51
+    ID              shift and go to state 91
+    CONSTSTRING     shift and go to state 52
+    NUMBER          shift and go to state 53
+    LPAREN          shift and go to state 36
+
+    MulExpr                        shift and go to state 123
+    UnExpr                         shift and go to state 49
+    PrimExpr                       shift and go to state 50
+
+state 87
+
+    (57) MulExpr -> MulExpr TIMES . UnExpr
+    (61) UnExpr -> . MINUS PrimExpr
+    (62) UnExpr -> . EXPLAMATION PrimExpr
+    (63) UnExpr -> . PrimExpr
+    (66) PrimExpr -> . ID LPAREN ListExpr RPAREN
+    (67) PrimExpr -> . ID LPAREN RPAREN
+    (68) PrimExpr -> . ID LCOLC Expr RCOLC
+    (69) PrimExpr -> . ID
+    (70) PrimExpr -> . CONSTSTRING
+    (71) PrimExpr -> . NUMBER
+    (72) PrimExpr -> . LPAREN Expr RPAREN
+
+    MINUS           shift and go to state 48
+    EXPLAMATION     shift and go to state 51
+    ID              shift and go to state 91
+    CONSTSTRING     shift and go to state 52
+    NUMBER          shift and go to state 53
+    LPAREN          shift and go to state 36
+
+    UnExpr                         shift and go to state 124
+    PrimExpr                       shift and go to state 50
+
+state 88
+
+    (58) MulExpr -> MulExpr DIVIDE . UnExpr
+    (61) UnExpr -> . MINUS PrimExpr
+    (62) UnExpr -> . EXPLAMATION PrimExpr
+    (63) UnExpr -> . PrimExpr
+    (66) PrimExpr -> . ID LPAREN ListExpr RPAREN
+    (67) PrimExpr -> . ID LPAREN RPAREN
+    (68) PrimExpr -> . ID LCOLC Expr RCOLC
+    (69) PrimExpr -> . ID
+    (70) PrimExpr -> . CONSTSTRING
+    (71) PrimExpr -> . NUMBER
+    (72) PrimExpr -> . LPAREN Expr RPAREN
+
+    MINUS           shift and go to state 48
+    EXPLAMATION     shift and go to state 51
+    ID              shift and go to state 91
+    CONSTSTRING     shift and go to state 52
+    NUMBER          shift and go to state 53
+    LPAREN          shift and go to state 36
+
+    UnExpr                         shift and go to state 125
+    PrimExpr                       shift and go to state 50
+
+state 89
+
+    (59) MulExpr -> MulExpr MOD . UnExpr
+    (61) UnExpr -> . MINUS PrimExpr
+    (62) UnExpr -> . EXPLAMATION PrimExpr
+    (63) UnExpr -> . PrimExpr
+    (66) PrimExpr -> . ID LPAREN ListExpr RPAREN
+    (67) PrimExpr -> . ID LPAREN RPAREN
+    (68) PrimExpr -> . ID LCOLC Expr RCOLC
+    (69) PrimExpr -> . ID
+    (70) PrimExpr -> . CONSTSTRING
+    (71) PrimExpr -> . NUMBER
+    (72) PrimExpr -> . LPAREN Expr RPAREN
+
+    MINUS           shift and go to state 48
+    EXPLAMATION     shift and go to state 51
+    ID              shift and go to state 91
+    CONSTSTRING     shift and go to state 52
+    NUMBER          shift and go to state 53
+    LPAREN          shift and go to state 36
+
+    UnExpr                         shift and go to state 126
+    PrimExpr                       shift and go to state 50
+
+state 90
+
+    (61) UnExpr -> MINUS PrimExpr .
+
+    TIMES           reduce using rule 61 (UnExpr -> MINUS PrimExpr .)
+    DIVIDE          reduce using rule 61 (UnExpr -> MINUS PrimExpr .)
+    MOD             reduce using rule 61 (UnExpr -> MINUS PrimExpr .)
+    PLUS            reduce using rule 61 (UnExpr -> MINUS PrimExpr .)
+    MINUS           reduce using rule 61 (UnExpr -> MINUS PrimExpr .)
+    MENOR           reduce using rule 61 (UnExpr -> MINUS PrimExpr .)
+    MAIOR           reduce using rule 61 (UnExpr -> MINUS PrimExpr .)
+    MAIOREQUALS     reduce using rule 61 (UnExpr -> MINUS PrimExpr .)
+    MENOREQUALS     reduce using rule 61 (UnExpr -> MINUS PrimExpr .)
+    EQUALS          reduce using rule 61 (UnExpr -> MINUS PrimExpr .)
+    DIFF            reduce using rule 61 (UnExpr -> MINUS PrimExpr .)
+    E               reduce using rule 61 (UnExpr -> MINUS PrimExpr .)
+    INTERROGATION   reduce using rule 61 (UnExpr -> MINUS PrimExpr .)
+    OU              reduce using rule 61 (UnExpr -> MINUS PrimExpr .)
+    SEMICOLON       reduce using rule 61 (UnExpr -> MINUS PrimExpr .)
+    RPAREN          reduce using rule 61 (UnExpr -> MINUS PrimExpr .)
+    COLON           reduce using rule 61 (UnExpr -> MINUS PrimExpr .)
+    RCOLC           reduce using rule 61 (UnExpr -> MINUS PrimExpr .)
+    COMMA           reduce using rule 61 (UnExpr -> MINUS PrimExpr .)
+
+
+state 91
+
+    (66) PrimExpr -> ID . LPAREN ListExpr RPAREN
+    (67) PrimExpr -> ID . LPAREN RPAREN
+    (68) PrimExpr -> ID . LCOLC Expr RCOLC
+    (69) PrimExpr -> ID .
+
+    LPAREN          shift and go to state 77
+    LCOLC           shift and go to state 127
+    TIMES           reduce using rule 69 (PrimExpr -> ID .)
+    DIVIDE          reduce using rule 69 (PrimExpr -> ID .)
+    MOD             reduce using rule 69 (PrimExpr -> ID .)
+    PLUS            reduce using rule 69 (PrimExpr -> ID .)
+    MINUS           reduce using rule 69 (PrimExpr -> ID .)
+    MENOR           reduce using rule 69 (PrimExpr -> ID .)
+    MAIOR           reduce using rule 69 (PrimExpr -> ID .)
+    MAIOREQUALS     reduce using rule 69 (PrimExpr -> ID .)
+    MENOREQUALS     reduce using rule 69 (PrimExpr -> ID .)
+    EQUALS          reduce using rule 69 (PrimExpr -> ID .)
+    DIFF            reduce using rule 69 (PrimExpr -> ID .)
+    E               reduce using rule 69 (PrimExpr -> ID .)
+    INTERROGATION   reduce using rule 69 (PrimExpr -> ID .)
+    OU              reduce using rule 69 (PrimExpr -> ID .)
+    SEMICOLON       reduce using rule 69 (PrimExpr -> ID .)
+    RPAREN          reduce using rule 69 (PrimExpr -> ID .)
+    COLON           reduce using rule 69 (PrimExpr -> ID .)
+    RCOLC           reduce using rule 69 (PrimExpr -> ID .)
+    COMMA           reduce using rule 69 (PrimExpr -> ID .)
+
+
+state 92
+
+    (62) UnExpr -> EXPLAMATION PrimExpr .
+
+    TIMES           reduce using rule 62 (UnExpr -> EXPLAMATION PrimExpr .)
+    DIVIDE          reduce using rule 62 (UnExpr -> EXPLAMATION PrimExpr .)
+    MOD             reduce using rule 62 (UnExpr -> EXPLAMATION PrimExpr .)
+    PLUS            reduce using rule 62 (UnExpr -> EXPLAMATION PrimExpr .)
+    MINUS           reduce using rule 62 (UnExpr -> EXPLAMATION PrimExpr .)
+    MENOR           reduce using rule 62 (UnExpr -> EXPLAMATION PrimExpr .)
+    MAIOR           reduce using rule 62 (UnExpr -> EXPLAMATION PrimExpr .)
+    MAIOREQUALS     reduce using rule 62 (UnExpr -> EXPLAMATION PrimExpr .)
+    MENOREQUALS     reduce using rule 62 (UnExpr -> EXPLAMATION PrimExpr .)
+    EQUALS          reduce using rule 62 (UnExpr -> EXPLAMATION PrimExpr .)
+    DIFF            reduce using rule 62 (UnExpr -> EXPLAMATION PrimExpr .)
+    E               reduce using rule 62 (UnExpr -> EXPLAMATION PrimExpr .)
+    INTERROGATION   reduce using rule 62 (UnExpr -> EXPLAMATION PrimExpr .)
+    OU              reduce using rule 62 (UnExpr -> EXPLAMATION PrimExpr .)
+    SEMICOLON       reduce using rule 62 (UnExpr -> EXPLAMATION PrimExpr .)
+    RPAREN          reduce using rule 62 (UnExpr -> EXPLAMATION PrimExpr .)
+    COLON           reduce using rule 62 (UnExpr -> EXPLAMATION PrimExpr .)
+    RCOLC           reduce using rule 62 (UnExpr -> EXPLAMATION PrimExpr .)
+    COMMA           reduce using rule 62 (UnExpr -> EXPLAMATION PrimExpr .)
+
+
+state 93
+
+    (20) ListaDeclVar -> Tipo ID DeclVar . SEMICOLON ListaDeclVar
+
+    SEMICOLON       shift and go to state 128
+
+
+state 94
+
+    (21) ListaDeclVar -> Tipo ID LCOLC . NUMBER RCOLC DeclVar SEMICOLON ListaDeclVar
+
+    NUMBER          shift and go to state 129
+
+
+state 95
+
+    (3) DeclFuncVar -> Tipo ID LCOLC NUMBER RCOLC DeclVar . SEMICOLON DeclFuncVar
+
+    SEMICOLON       shift and go to state 130
+
+
+state 96
+
+    (8) DeclVar -> COMMA ID LCOLC NUMBER . RCOLC DeclVar
+
+    RCOLC           shift and go to state 131
+
+
+state 97
+
+    (10) DeclFunc -> LPAREN ListaParametros RPAREN Bloco .
+
+    INT             reduce using rule 10 (DeclFunc -> LPAREN ListaParametros RPAREN Bloco .)
+    CAR             reduce using rule 10 (DeclFunc -> LPAREN ListaParametros RPAREN Bloco .)
+    PROGRAMA        reduce using rule 10 (DeclFunc -> LPAREN ListaParametros RPAREN Bloco .)
+
+
+state 98
+
+    (14) ListaParametrosCont -> Tipo ID LCOLC . RCOLC
+    (16) ListaParametrosCont -> Tipo ID LCOLC . RCOLC COMMA ListaParametrosCont
+
+    RCOLC           shift and go to state 132
+
+
+state 99
+
+    (15) ListaParametrosCont -> Tipo ID COMMA . ListaParametrosCont
+    (13) ListaParametrosCont -> . Tipo ID
+    (14) ListaParametrosCont -> . Tipo ID LCOLC RCOLC
+    (15) ListaParametrosCont -> . Tipo ID COMMA ListaParametrosCont
+    (16) ListaParametrosCont -> . Tipo ID LCOLC RCOLC COMMA ListaParametrosCont
+    (22) Tipo -> . INT
+    (23) Tipo -> . CAR
+
+    INT             shift and go to state 4
+    CAR             shift and go to state 5
+
+    Tipo                           shift and go to state 24
+    ListaParametrosCont            shift and go to state 133
+
+state 100
+
+    (28) Comando -> RETORNE Expr SEMICOLON .
+
+    SEMICOLON       reduce using rule 28 (Comando -> RETORNE Expr SEMICOLON .)
+    RETORNE         reduce using rule 28 (Comando -> RETORNE Expr SEMICOLON .)
+    LEIA            reduce using rule 28 (Comando -> RETORNE Expr SEMICOLON .)
+    ESCREVA         reduce using rule 28 (Comando -> RETORNE Expr SEMICOLON .)
+    NOVALINHA       reduce using rule 28 (Comando -> RETORNE Expr SEMICOLON .)
+    SE              reduce using rule 28 (Comando -> RETORNE Expr SEMICOLON .)
+    ENQUANTO        reduce using rule 28 (Comando -> RETORNE Expr SEMICOLON .)
+    LBRACE          reduce using rule 28 (Comando -> RETORNE Expr SEMICOLON .)
+    ID              reduce using rule 28 (Comando -> RETORNE Expr SEMICOLON .)
+    MINUS           reduce using rule 28 (Comando -> RETORNE Expr SEMICOLON .)
+    EXPLAMATION     reduce using rule 28 (Comando -> RETORNE Expr SEMICOLON .)
+    CONSTSTRING     reduce using rule 28 (Comando -> RETORNE Expr SEMICOLON .)
+    NUMBER          reduce using rule 28 (Comando -> RETORNE Expr SEMICOLON .)
+    LPAREN          reduce using rule 28 (Comando -> RETORNE Expr SEMICOLON .)
+    RBRACE          reduce using rule 28 (Comando -> RETORNE Expr SEMICOLON .)
+    SENAO           reduce using rule 28 (Comando -> RETORNE Expr SEMICOLON .)
+
+
+state 101
+
+    (29) Comando -> LEIA LValueExpr SEMICOLON .
+
+    SEMICOLON       reduce using rule 29 (Comando -> LEIA LValueExpr SEMICOLON .)
+    RETORNE         reduce using rule 29 (Comando -> LEIA LValueExpr SEMICOLON .)
+    LEIA            reduce using rule 29 (Comando -> LEIA LValueExpr SEMICOLON .)
+    ESCREVA         reduce using rule 29 (Comando -> LEIA LValueExpr SEMICOLON .)
+    NOVALINHA       reduce using rule 29 (Comando -> LEIA LValueExpr SEMICOLON .)
+    SE              reduce using rule 29 (Comando -> LEIA LValueExpr SEMICOLON .)
+    ENQUANTO        reduce using rule 29 (Comando -> LEIA LValueExpr SEMICOLON .)
+    LBRACE          reduce using rule 29 (Comando -> LEIA LValueExpr SEMICOLON .)
+    ID              reduce using rule 29 (Comando -> LEIA LValueExpr SEMICOLON .)
+    MINUS           reduce using rule 29 (Comando -> LEIA LValueExpr SEMICOLON .)
+    EXPLAMATION     reduce using rule 29 (Comando -> LEIA LValueExpr SEMICOLON .)
+    CONSTSTRING     reduce using rule 29 (Comando -> LEIA LValueExpr SEMICOLON .)
+    NUMBER          reduce using rule 29 (Comando -> LEIA LValueExpr SEMICOLON .)
+    LPAREN          reduce using rule 29 (Comando -> LEIA LValueExpr SEMICOLON .)
+    RBRACE          reduce using rule 29 (Comando -> LEIA LValueExpr SEMICOLON .)
+    SENAO           reduce using rule 29 (Comando -> LEIA LValueExpr SEMICOLON .)
+
+
+state 102
+
+    (64) LValueExpr -> ID LCOLC . Expr RCOLC
+    (37) Expr -> . AssignExpr
+    (38) AssignExpr -> . CondExpr
+    (39) AssignExpr -> . LValueExpr ASSIGN AssignExpr
+    (40) CondExpr -> . OrExpr
+    (41) CondExpr -> . OrExpr INTERROGATION Expr COLON CondExpr
+    (64) LValueExpr -> . ID LCOLC Expr RCOLC
+    (65) LValueExpr -> . ID
+    (42) OrExpr -> . OrExpr OU AndExpr
+    (43) OrExpr -> . AndExpr
+    (44) AndExpr -> . AndExpr E EqExpr
+    (45) AndExpr -> . EqExpr
+    (46) EqExpr -> . EqExpr EQUALS DesigExpr
+    (47) EqExpr -> . EqExpr DIFF DesigExpr
+    (48) EqExpr -> . DesigExpr
+    (49) DesigExpr -> . DesigExpr MENOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (51) DesigExpr -> . DesigExpr MAIOREQUALS AddExpr
+    (52) DesigExpr -> . DesigExpr MENOREQUALS AddExpr
+    (53) DesigExpr -> . AddExpr
+    (54) AddExpr -> . AddExpr PLUS MulExpr
+    (55) AddExpr -> . AddExpr MINUS MulExpr
+    (56) AddExpr -> . MulExpr
+    (57) MulExpr -> . MulExpr TIMES UnExpr
+    (58) MulExpr -> . MulExpr DIVIDE UnExpr
+    (59) MulExpr -> . MulExpr MOD UnExpr
+    (60) MulExpr -> . UnExpr
+    (61) UnExpr -> . MINUS PrimExpr
+    (62) UnExpr -> . EXPLAMATION PrimExpr
+    (63) UnExpr -> . PrimExpr
+    (66) PrimExpr -> . ID LPAREN ListExpr RPAREN
+    (67) PrimExpr -> . ID LPAREN RPAREN
+    (68) PrimExpr -> . ID LCOLC Expr RCOLC
+    (69) PrimExpr -> . ID
+    (70) PrimExpr -> . CONSTSTRING
+    (71) PrimExpr -> . NUMBER
+    (72) PrimExpr -> . LPAREN Expr RPAREN
+
+    ID              shift and go to state 42
+    MINUS           shift and go to state 48
+    EXPLAMATION     shift and go to state 51
+    CONSTSTRING     shift and go to state 52
+    NUMBER          shift and go to state 53
+    LPAREN          shift and go to state 36
+
+    Expr                           shift and go to state 134
+    AssignExpr                     shift and go to state 39
+    CondExpr                       shift and go to state 40
+    LValueExpr                     shift and go to state 32
+    OrExpr                         shift and go to state 41
+    AndExpr                        shift and go to state 43
+    EqExpr                         shift and go to state 44
+    DesigExpr                      shift and go to state 45
+    AddExpr                        shift and go to state 46
+    MulExpr                        shift and go to state 47
+    UnExpr                         shift and go to state 49
+    PrimExpr                       shift and go to state 50
+
+state 103
+
+    (39) AssignExpr -> LValueExpr ASSIGN AssignExpr .
+
+    SEMICOLON       reduce using rule 39 (AssignExpr -> LValueExpr ASSIGN AssignExpr .)
+    RPAREN          reduce using rule 39 (AssignExpr -> LValueExpr ASSIGN AssignExpr .)
+    COLON           reduce using rule 39 (AssignExpr -> LValueExpr ASSIGN AssignExpr .)
+    RCOLC           reduce using rule 39 (AssignExpr -> LValueExpr ASSIGN AssignExpr .)
+    COMMA           reduce using rule 39 (AssignExpr -> LValueExpr ASSIGN AssignExpr .)
+
+
+state 104
+
+    (30) Comando -> ESCREVA Expr SEMICOLON .
+
+    SEMICOLON       reduce using rule 30 (Comando -> ESCREVA Expr SEMICOLON .)
+    RETORNE         reduce using rule 30 (Comando -> ESCREVA Expr SEMICOLON .)
+    LEIA            reduce using rule 30 (Comando -> ESCREVA Expr SEMICOLON .)
+    ESCREVA         reduce using rule 30 (Comando -> ESCREVA Expr SEMICOLON .)
+    NOVALINHA       reduce using rule 30 (Comando -> ESCREVA Expr SEMICOLON .)
+    SE              reduce using rule 30 (Comando -> ESCREVA Expr SEMICOLON .)
+    ENQUANTO        reduce using rule 30 (Comando -> ESCREVA Expr SEMICOLON .)
+    LBRACE          reduce using rule 30 (Comando -> ESCREVA Expr SEMICOLON .)
+    ID              reduce using rule 30 (Comando -> ESCREVA Expr SEMICOLON .)
+    MINUS           reduce using rule 30 (Comando -> ESCREVA Expr SEMICOLON .)
+    EXPLAMATION     reduce using rule 30 (Comando -> ESCREVA Expr SEMICOLON .)
+    CONSTSTRING     reduce using rule 30 (Comando -> ESCREVA Expr SEMICOLON .)
+    NUMBER          reduce using rule 30 (Comando -> ESCREVA Expr SEMICOLON .)
+    LPAREN          reduce using rule 30 (Comando -> ESCREVA Expr SEMICOLON .)
+    RBRACE          reduce using rule 30 (Comando -> ESCREVA Expr SEMICOLON .)
+    SENAO           reduce using rule 30 (Comando -> ESCREVA Expr SEMICOLON .)
+
+
+state 105
+
+    (31) Comando -> ESCREVA NORMALSTRING SEMICOLON .
+
+    SEMICOLON       reduce using rule 31 (Comando -> ESCREVA NORMALSTRING SEMICOLON .)
+    RETORNE         reduce using rule 31 (Comando -> ESCREVA NORMALSTRING SEMICOLON .)
+    LEIA            reduce using rule 31 (Comando -> ESCREVA NORMALSTRING SEMICOLON .)
+    ESCREVA         reduce using rule 31 (Comando -> ESCREVA NORMALSTRING SEMICOLON .)
+    NOVALINHA       reduce using rule 31 (Comando -> ESCREVA NORMALSTRING SEMICOLON .)
+    SE              reduce using rule 31 (Comando -> ESCREVA NORMALSTRING SEMICOLON .)
+    ENQUANTO        reduce using rule 31 (Comando -> ESCREVA NORMALSTRING SEMICOLON .)
+    LBRACE          reduce using rule 31 (Comando -> ESCREVA NORMALSTRING SEMICOLON .)
+    ID              reduce using rule 31 (Comando -> ESCREVA NORMALSTRING SEMICOLON .)
+    MINUS           reduce using rule 31 (Comando -> ESCREVA NORMALSTRING SEMICOLON .)
+    EXPLAMATION     reduce using rule 31 (Comando -> ESCREVA NORMALSTRING SEMICOLON .)
+    CONSTSTRING     reduce using rule 31 (Comando -> ESCREVA NORMALSTRING SEMICOLON .)
+    NUMBER          reduce using rule 31 (Comando -> ESCREVA NORMALSTRING SEMICOLON .)
+    LPAREN          reduce using rule 31 (Comando -> ESCREVA NORMALSTRING SEMICOLON .)
+    RBRACE          reduce using rule 31 (Comando -> ESCREVA NORMALSTRING SEMICOLON .)
+    SENAO           reduce using rule 31 (Comando -> ESCREVA NORMALSTRING SEMICOLON .)
+
+
+state 106
+
+    (33) Comando -> SE LPAREN Expr . RPAREN ENTAO Comando
+    (34) Comando -> SE LPAREN Expr . RPAREN ENTAO Comando SENAO Comando
+
+    RPAREN          shift and go to state 135
+
+
+state 107
+
+    (72) PrimExpr -> LPAREN Expr RPAREN .
+
+    TIMES           reduce using rule 72 (PrimExpr -> LPAREN Expr RPAREN .)
+    DIVIDE          reduce using rule 72 (PrimExpr -> LPAREN Expr RPAREN .)
+    MOD             reduce using rule 72 (PrimExpr -> LPAREN Expr RPAREN .)
+    PLUS            reduce using rule 72 (PrimExpr -> LPAREN Expr RPAREN .)
+    MINUS           reduce using rule 72 (PrimExpr -> LPAREN Expr RPAREN .)
+    MENOR           reduce using rule 72 (PrimExpr -> LPAREN Expr RPAREN .)
+    MAIOR           reduce using rule 72 (PrimExpr -> LPAREN Expr RPAREN .)
+    MAIOREQUALS     reduce using rule 72 (PrimExpr -> LPAREN Expr RPAREN .)
+    MENOREQUALS     reduce using rule 72 (PrimExpr -> LPAREN Expr RPAREN .)
+    EQUALS          reduce using rule 72 (PrimExpr -> LPAREN Expr RPAREN .)
+    DIFF            reduce using rule 72 (PrimExpr -> LPAREN Expr RPAREN .)
+    E               reduce using rule 72 (PrimExpr -> LPAREN Expr RPAREN .)
+    INTERROGATION   reduce using rule 72 (PrimExpr -> LPAREN Expr RPAREN .)
+    OU              reduce using rule 72 (PrimExpr -> LPAREN Expr RPAREN .)
+    SEMICOLON       reduce using rule 72 (PrimExpr -> LPAREN Expr RPAREN .)
+    RPAREN          reduce using rule 72 (PrimExpr -> LPAREN Expr RPAREN .)
+    COLON           reduce using rule 72 (PrimExpr -> LPAREN Expr RPAREN .)
+    RCOLC           reduce using rule 72 (PrimExpr -> LPAREN Expr RPAREN .)
+    COMMA           reduce using rule 72 (PrimExpr -> LPAREN Expr RPAREN .)
+
+
+state 108
+
+    (35) Comando -> ENQUANTO LPAREN Expr . RPAREN EXECUTE Comando
+
+    RPAREN          shift and go to state 136
+
+
+state 109
+
+    (41) CondExpr -> OrExpr INTERROGATION Expr . COLON CondExpr
+
+    COLON           shift and go to state 137
+
+
+state 110
+
+    (42) OrExpr -> OrExpr OU AndExpr .
+    (44) AndExpr -> AndExpr . E EqExpr
+
+    INTERROGATION   reduce using rule 42 (OrExpr -> OrExpr OU AndExpr .)
+    OU              reduce using rule 42 (OrExpr -> OrExpr OU AndExpr .)
+    SEMICOLON       reduce using rule 42 (OrExpr -> OrExpr OU AndExpr .)
+    RPAREN          reduce using rule 42 (OrExpr -> OrExpr OU AndExpr .)
+    COLON           reduce using rule 42 (OrExpr -> OrExpr OU AndExpr .)
+    RCOLC           reduce using rule 42 (OrExpr -> OrExpr OU AndExpr .)
+    COMMA           reduce using rule 42 (OrExpr -> OrExpr OU AndExpr .)
+    E               shift and go to state 78
+
+
+state 111
+
+    (64) LValueExpr -> ID LCOLC Expr . RCOLC
+    (68) PrimExpr -> ID LCOLC Expr . RCOLC
+
+    RCOLC           shift and go to state 138
+
+
+state 112
+
+    (66) PrimExpr -> ID LPAREN ListExpr . RPAREN
+    (74) ListExpr -> ListExpr . COMMA AssignExpr
+
+    RPAREN          shift and go to state 139
+    COMMA           shift and go to state 140
+
+
+state 113
+
+    (67) PrimExpr -> ID LPAREN RPAREN .
+
+    TIMES           reduce using rule 67 (PrimExpr -> ID LPAREN RPAREN .)
+    DIVIDE          reduce using rule 67 (PrimExpr -> ID LPAREN RPAREN .)
+    MOD             reduce using rule 67 (PrimExpr -> ID LPAREN RPAREN .)
+    PLUS            reduce using rule 67 (PrimExpr -> ID LPAREN RPAREN .)
+    MINUS           reduce using rule 67 (PrimExpr -> ID LPAREN RPAREN .)
+    MENOR           reduce using rule 67 (PrimExpr -> ID LPAREN RPAREN .)
+    MAIOR           reduce using rule 67 (PrimExpr -> ID LPAREN RPAREN .)
+    MAIOREQUALS     reduce using rule 67 (PrimExpr -> ID LPAREN RPAREN .)
+    MENOREQUALS     reduce using rule 67 (PrimExpr -> ID LPAREN RPAREN .)
+    EQUALS          reduce using rule 67 (PrimExpr -> ID LPAREN RPAREN .)
+    DIFF            reduce using rule 67 (PrimExpr -> ID LPAREN RPAREN .)
+    E               reduce using rule 67 (PrimExpr -> ID LPAREN RPAREN .)
+    INTERROGATION   reduce using rule 67 (PrimExpr -> ID LPAREN RPAREN .)
+    OU              reduce using rule 67 (PrimExpr -> ID LPAREN RPAREN .)
+    SEMICOLON       reduce using rule 67 (PrimExpr -> ID LPAREN RPAREN .)
+    RPAREN          reduce using rule 67 (PrimExpr -> ID LPAREN RPAREN .)
+    COLON           reduce using rule 67 (PrimExpr -> ID LPAREN RPAREN .)
+    RCOLC           reduce using rule 67 (PrimExpr -> ID LPAREN RPAREN .)
+    COMMA           reduce using rule 67 (PrimExpr -> ID LPAREN RPAREN .)
+
+
+state 114
+
+    (73) ListExpr -> AssignExpr .
+
+    RPAREN          reduce using rule 73 (ListExpr -> AssignExpr .)
+    COMMA           reduce using rule 73 (ListExpr -> AssignExpr .)
+
+
+state 115
+
+    (44) AndExpr -> AndExpr E EqExpr .
+    (46) EqExpr -> EqExpr . EQUALS DesigExpr
+    (47) EqExpr -> EqExpr . DIFF DesigExpr
+
+    E               reduce using rule 44 (AndExpr -> AndExpr E EqExpr .)
+    INTERROGATION   reduce using rule 44 (AndExpr -> AndExpr E EqExpr .)
+    OU              reduce using rule 44 (AndExpr -> AndExpr E EqExpr .)
+    SEMICOLON       reduce using rule 44 (AndExpr -> AndExpr E EqExpr .)
+    RPAREN          reduce using rule 44 (AndExpr -> AndExpr E EqExpr .)
+    COLON           reduce using rule 44 (AndExpr -> AndExpr E EqExpr .)
+    RCOLC           reduce using rule 44 (AndExpr -> AndExpr E EqExpr .)
+    COMMA           reduce using rule 44 (AndExpr -> AndExpr E EqExpr .)
+    EQUALS          shift and go to state 79
+    DIFF            shift and go to state 80
+
+
+state 116
+
+    (46) EqExpr -> EqExpr EQUALS DesigExpr .
+    (49) DesigExpr -> DesigExpr . MENOR AddExpr
+    (50) DesigExpr -> DesigExpr . MAIOR AddExpr
+    (51) DesigExpr -> DesigExpr . MAIOREQUALS AddExpr
+    (52) DesigExpr -> DesigExpr . MENOREQUALS AddExpr
+
+    EQUALS          reduce using rule 46 (EqExpr -> EqExpr EQUALS DesigExpr .)
+    DIFF            reduce using rule 46 (EqExpr -> EqExpr EQUALS DesigExpr .)
+    E               reduce using rule 46 (EqExpr -> EqExpr EQUALS DesigExpr .)
+    INTERROGATION   reduce using rule 46 (EqExpr -> EqExpr EQUALS DesigExpr .)
+    OU              reduce using rule 46 (EqExpr -> EqExpr EQUALS DesigExpr .)
+    SEMICOLON       reduce using rule 46 (EqExpr -> EqExpr EQUALS DesigExpr .)
+    RPAREN          reduce using rule 46 (EqExpr -> EqExpr EQUALS DesigExpr .)
+    COLON           reduce using rule 46 (EqExpr -> EqExpr EQUALS DesigExpr .)
+    RCOLC           reduce using rule 46 (EqExpr -> EqExpr EQUALS DesigExpr .)
+    COMMA           reduce using rule 46 (EqExpr -> EqExpr EQUALS DesigExpr .)
+    MENOR           shift and go to state 81
+    MAIOR           shift and go to state 82
+    MAIOREQUALS     shift and go to state 83
+    MENOREQUALS     shift and go to state 84
+
+
+state 117
+
+    (47) EqExpr -> EqExpr DIFF DesigExpr .
+    (49) DesigExpr -> DesigExpr . MENOR AddExpr
+    (50) DesigExpr -> DesigExpr . MAIOR AddExpr
+    (51) DesigExpr -> DesigExpr . MAIOREQUALS AddExpr
+    (52) DesigExpr -> DesigExpr . MENOREQUALS AddExpr
+
+    EQUALS          reduce using rule 47 (EqExpr -> EqExpr DIFF DesigExpr .)
+    DIFF            reduce using rule 47 (EqExpr -> EqExpr DIFF DesigExpr .)
+    E               reduce using rule 47 (EqExpr -> EqExpr DIFF DesigExpr .)
+    INTERROGATION   reduce using rule 47 (EqExpr -> EqExpr DIFF DesigExpr .)
+    OU              reduce using rule 47 (EqExpr -> EqExpr DIFF DesigExpr .)
+    SEMICOLON       reduce using rule 47 (EqExpr -> EqExpr DIFF DesigExpr .)
+    RPAREN          reduce using rule 47 (EqExpr -> EqExpr DIFF DesigExpr .)
+    COLON           reduce using rule 47 (EqExpr -> EqExpr DIFF DesigExpr .)
+    RCOLC           reduce using rule 47 (EqExpr -> EqExpr DIFF DesigExpr .)
+    COMMA           reduce using rule 47 (EqExpr -> EqExpr DIFF DesigExpr .)
+    MENOR           shift and go to state 81
+    MAIOR           shift and go to state 82
+    MAIOREQUALS     shift and go to state 83
+    MENOREQUALS     shift and go to state 84
+
+
+state 118
+
+    (49) DesigExpr -> DesigExpr MENOR AddExpr .
+    (54) AddExpr -> AddExpr . PLUS MulExpr
+    (55) AddExpr -> AddExpr . MINUS MulExpr
+
+    MENOR           reduce using rule 49 (DesigExpr -> DesigExpr MENOR AddExpr .)
+    MAIOR           reduce using rule 49 (DesigExpr -> DesigExpr MENOR AddExpr .)
+    MAIOREQUALS     reduce using rule 49 (DesigExpr -> DesigExpr MENOR AddExpr .)
+    MENOREQUALS     reduce using rule 49 (DesigExpr -> DesigExpr MENOR AddExpr .)
+    EQUALS          reduce using rule 49 (DesigExpr -> DesigExpr MENOR AddExpr .)
+    DIFF            reduce using rule 49 (DesigExpr -> DesigExpr MENOR AddExpr .)
+    E               reduce using rule 49 (DesigExpr -> DesigExpr MENOR AddExpr .)
+    INTERROGATION   reduce using rule 49 (DesigExpr -> DesigExpr MENOR AddExpr .)
+    OU              reduce using rule 49 (DesigExpr -> DesigExpr MENOR AddExpr .)
+    SEMICOLON       reduce using rule 49 (DesigExpr -> DesigExpr MENOR AddExpr .)
+    RPAREN          reduce using rule 49 (DesigExpr -> DesigExpr MENOR AddExpr .)
+    COLON           reduce using rule 49 (DesigExpr -> DesigExpr MENOR AddExpr .)
+    RCOLC           reduce using rule 49 (DesigExpr -> DesigExpr MENOR AddExpr .)
+    COMMA           reduce using rule 49 (DesigExpr -> DesigExpr MENOR AddExpr .)
+    PLUS            shift and go to state 85
+    MINUS           shift and go to state 86
+
+
+state 119
+
+    (50) DesigExpr -> DesigExpr MAIOR AddExpr .
+    (54) AddExpr -> AddExpr . PLUS MulExpr
+    (55) AddExpr -> AddExpr . MINUS MulExpr
+
+    MENOR           reduce using rule 50 (DesigExpr -> DesigExpr MAIOR AddExpr .)
+    MAIOR           reduce using rule 50 (DesigExpr -> DesigExpr MAIOR AddExpr .)
+    MAIOREQUALS     reduce using rule 50 (DesigExpr -> DesigExpr MAIOR AddExpr .)
+    MENOREQUALS     reduce using rule 50 (DesigExpr -> DesigExpr MAIOR AddExpr .)
+    EQUALS          reduce using rule 50 (DesigExpr -> DesigExpr MAIOR AddExpr .)
+    DIFF            reduce using rule 50 (DesigExpr -> DesigExpr MAIOR AddExpr .)
+    E               reduce using rule 50 (DesigExpr -> DesigExpr MAIOR AddExpr .)
+    INTERROGATION   reduce using rule 50 (DesigExpr -> DesigExpr MAIOR AddExpr .)
+    OU              reduce using rule 50 (DesigExpr -> DesigExpr MAIOR AddExpr .)
+    SEMICOLON       reduce using rule 50 (DesigExpr -> DesigExpr MAIOR AddExpr .)
+    RPAREN          reduce using rule 50 (DesigExpr -> DesigExpr MAIOR AddExpr .)
+    COLON           reduce using rule 50 (DesigExpr -> DesigExpr MAIOR AddExpr .)
+    RCOLC           reduce using rule 50 (DesigExpr -> DesigExpr MAIOR AddExpr .)
+    COMMA           reduce using rule 50 (DesigExpr -> DesigExpr MAIOR AddExpr .)
+    PLUS            shift and go to state 85
+    MINUS           shift and go to state 86
+
+
+state 120
+
+    (51) DesigExpr -> DesigExpr MAIOREQUALS AddExpr .
+    (54) AddExpr -> AddExpr . PLUS MulExpr
+    (55) AddExpr -> AddExpr . MINUS MulExpr
+
+    MENOR           reduce using rule 51 (DesigExpr -> DesigExpr MAIOREQUALS AddExpr .)
+    MAIOR           reduce using rule 51 (DesigExpr -> DesigExpr MAIOREQUALS AddExpr .)
+    MAIOREQUALS     reduce using rule 51 (DesigExpr -> DesigExpr MAIOREQUALS AddExpr .)
+    MENOREQUALS     reduce using rule 51 (DesigExpr -> DesigExpr MAIOREQUALS AddExpr .)
+    EQUALS          reduce using rule 51 (DesigExpr -> DesigExpr MAIOREQUALS AddExpr .)
+    DIFF            reduce using rule 51 (DesigExpr -> DesigExpr MAIOREQUALS AddExpr .)
+    E               reduce using rule 51 (DesigExpr -> DesigExpr MAIOREQUALS AddExpr .)
+    INTERROGATION   reduce using rule 51 (DesigExpr -> DesigExpr MAIOREQUALS AddExpr .)
+    OU              reduce using rule 51 (DesigExpr -> DesigExpr MAIOREQUALS AddExpr .)
+    SEMICOLON       reduce using rule 51 (DesigExpr -> DesigExpr MAIOREQUALS AddExpr .)
+    RPAREN          reduce using rule 51 (DesigExpr -> DesigExpr MAIOREQUALS AddExpr .)
+    COLON           reduce using rule 51 (DesigExpr -> DesigExpr MAIOREQUALS AddExpr .)
+    RCOLC           reduce using rule 51 (DesigExpr -> DesigExpr MAIOREQUALS AddExpr .)
+    COMMA           reduce using rule 51 (DesigExpr -> DesigExpr MAIOREQUALS AddExpr .)
+    PLUS            shift and go to state 85
+    MINUS           shift and go to state 86
+
+
+state 121
+
+    (52) DesigExpr -> DesigExpr MENOREQUALS AddExpr .
+    (54) AddExpr -> AddExpr . PLUS MulExpr
+    (55) AddExpr -> AddExpr . MINUS MulExpr
+
+    MENOR           reduce using rule 52 (DesigExpr -> DesigExpr MENOREQUALS AddExpr .)
+    MAIOR           reduce using rule 52 (DesigExpr -> DesigExpr MENOREQUALS AddExpr .)
+    MAIOREQUALS     reduce using rule 52 (DesigExpr -> DesigExpr MENOREQUALS AddExpr .)
+    MENOREQUALS     reduce using rule 52 (DesigExpr -> DesigExpr MENOREQUALS AddExpr .)
+    EQUALS          reduce using rule 52 (DesigExpr -> DesigExpr MENOREQUALS AddExpr .)
+    DIFF            reduce using rule 52 (DesigExpr -> DesigExpr MENOREQUALS AddExpr .)
+    E               reduce using rule 52 (DesigExpr -> DesigExpr MENOREQUALS AddExpr .)
+    INTERROGATION   reduce using rule 52 (DesigExpr -> DesigExpr MENOREQUALS AddExpr .)
+    OU              reduce using rule 52 (DesigExpr -> DesigExpr MENOREQUALS AddExpr .)
+    SEMICOLON       reduce using rule 52 (DesigExpr -> DesigExpr MENOREQUALS AddExpr .)
+    RPAREN          reduce using rule 52 (DesigExpr -> DesigExpr MENOREQUALS AddExpr .)
+    COLON           reduce using rule 52 (DesigExpr -> DesigExpr MENOREQUALS AddExpr .)
+    RCOLC           reduce using rule 52 (DesigExpr -> DesigExpr MENOREQUALS AddExpr .)
+    COMMA           reduce using rule 52 (DesigExpr -> DesigExpr MENOREQUALS AddExpr .)
+    PLUS            shift and go to state 85
+    MINUS           shift and go to state 86
+
+
+state 122
+
+    (54) AddExpr -> AddExpr PLUS MulExpr .
+    (57) MulExpr -> MulExpr . TIMES UnExpr
+    (58) MulExpr -> MulExpr . DIVIDE UnExpr
+    (59) MulExpr -> MulExpr . MOD UnExpr
+
+    PLUS            reduce using rule 54 (AddExpr -> AddExpr PLUS MulExpr .)
+    MINUS           reduce using rule 54 (AddExpr -> AddExpr PLUS MulExpr .)
+    MENOR           reduce using rule 54 (AddExpr -> AddExpr PLUS MulExpr .)
+    MAIOR           reduce using rule 54 (AddExpr -> AddExpr PLUS MulExpr .)
+    MAIOREQUALS     reduce using rule 54 (AddExpr -> AddExpr PLUS MulExpr .)
+    MENOREQUALS     reduce using rule 54 (AddExpr -> AddExpr PLUS MulExpr .)
+    EQUALS          reduce using rule 54 (AddExpr -> AddExpr PLUS MulExpr .)
+    DIFF            reduce using rule 54 (AddExpr -> AddExpr PLUS MulExpr .)
+    E               reduce using rule 54 (AddExpr -> AddExpr PLUS MulExpr .)
+    INTERROGATION   reduce using rule 54 (AddExpr -> AddExpr PLUS MulExpr .)
+    OU              reduce using rule 54 (AddExpr -> AddExpr PLUS MulExpr .)
+    SEMICOLON       reduce using rule 54 (AddExpr -> AddExpr PLUS MulExpr .)
+    RPAREN          reduce using rule 54 (AddExpr -> AddExpr PLUS MulExpr .)
+    COLON           reduce using rule 54 (AddExpr -> AddExpr PLUS MulExpr .)
+    RCOLC           reduce using rule 54 (AddExpr -> AddExpr PLUS MulExpr .)
+    COMMA           reduce using rule 54 (AddExpr -> AddExpr PLUS MulExpr .)
+    TIMES           shift and go to state 87
+    DIVIDE          shift and go to state 88
+    MOD             shift and go to state 89
+
+
+state 123
+
+    (55) AddExpr -> AddExpr MINUS MulExpr .
+    (57) MulExpr -> MulExpr . TIMES UnExpr
+    (58) MulExpr -> MulExpr . DIVIDE UnExpr
+    (59) MulExpr -> MulExpr . MOD UnExpr
+
+    PLUS            reduce using rule 55 (AddExpr -> AddExpr MINUS MulExpr .)
+    MINUS           reduce using rule 55 (AddExpr -> AddExpr MINUS MulExpr .)
+    MENOR           reduce using rule 55 (AddExpr -> AddExpr MINUS MulExpr .)
+    MAIOR           reduce using rule 55 (AddExpr -> AddExpr MINUS MulExpr .)
+    MAIOREQUALS     reduce using rule 55 (AddExpr -> AddExpr MINUS MulExpr .)
+    MENOREQUALS     reduce using rule 55 (AddExpr -> AddExpr MINUS MulExpr .)
+    EQUALS          reduce using rule 55 (AddExpr -> AddExpr MINUS MulExpr .)
+    DIFF            reduce using rule 55 (AddExpr -> AddExpr MINUS MulExpr .)
+    E               reduce using rule 55 (AddExpr -> AddExpr MINUS MulExpr .)
+    INTERROGATION   reduce using rule 55 (AddExpr -> AddExpr MINUS MulExpr .)
+    OU              reduce using rule 55 (AddExpr -> AddExpr MINUS MulExpr .)
+    SEMICOLON       reduce using rule 55 (AddExpr -> AddExpr MINUS MulExpr .)
+    RPAREN          reduce using rule 55 (AddExpr -> AddExpr MINUS MulExpr .)
+    COLON           reduce using rule 55 (AddExpr -> AddExpr MINUS MulExpr .)
+    RCOLC           reduce using rule 55 (AddExpr -> AddExpr MINUS MulExpr .)
+    COMMA           reduce using rule 55 (AddExpr -> AddExpr MINUS MulExpr .)
+    TIMES           shift and go to state 87
+    DIVIDE          shift and go to state 88
+    MOD             shift and go to state 89
+
+
+state 124
+
+    (57) MulExpr -> MulExpr TIMES UnExpr .
+
+    TIMES           reduce using rule 57 (MulExpr -> MulExpr TIMES UnExpr .)
+    DIVIDE          reduce using rule 57 (MulExpr -> MulExpr TIMES UnExpr .)
+    MOD             reduce using rule 57 (MulExpr -> MulExpr TIMES UnExpr .)
+    PLUS            reduce using rule 57 (MulExpr -> MulExpr TIMES UnExpr .)
+    MINUS           reduce using rule 57 (MulExpr -> MulExpr TIMES UnExpr .)
+    MENOR           reduce using rule 57 (MulExpr -> MulExpr TIMES UnExpr .)
+    MAIOR           reduce using rule 57 (MulExpr -> MulExpr TIMES UnExpr .)
+    MAIOREQUALS     reduce using rule 57 (MulExpr -> MulExpr TIMES UnExpr .)
+    MENOREQUALS     reduce using rule 57 (MulExpr -> MulExpr TIMES UnExpr .)
+    EQUALS          reduce using rule 57 (MulExpr -> MulExpr TIMES UnExpr .)
+    DIFF            reduce using rule 57 (MulExpr -> MulExpr TIMES UnExpr .)
+    E               reduce using rule 57 (MulExpr -> MulExpr TIMES UnExpr .)
+    INTERROGATION   reduce using rule 57 (MulExpr -> MulExpr TIMES UnExpr .)
+    OU              reduce using rule 57 (MulExpr -> MulExpr TIMES UnExpr .)
+    SEMICOLON       reduce using rule 57 (MulExpr -> MulExpr TIMES UnExpr .)
+    RPAREN          reduce using rule 57 (MulExpr -> MulExpr TIMES UnExpr .)
+    COLON           reduce using rule 57 (MulExpr -> MulExpr TIMES UnExpr .)
+    RCOLC           reduce using rule 57 (MulExpr -> MulExpr TIMES UnExpr .)
+    COMMA           reduce using rule 57 (MulExpr -> MulExpr TIMES UnExpr .)
+
+
+state 125
+
+    (58) MulExpr -> MulExpr DIVIDE UnExpr .
+
+    TIMES           reduce using rule 58 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    DIVIDE          reduce using rule 58 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    MOD             reduce using rule 58 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    PLUS            reduce using rule 58 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    MINUS           reduce using rule 58 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    MENOR           reduce using rule 58 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    MAIOR           reduce using rule 58 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    MAIOREQUALS     reduce using rule 58 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    MENOREQUALS     reduce using rule 58 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    EQUALS          reduce using rule 58 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    DIFF            reduce using rule 58 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    E               reduce using rule 58 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    INTERROGATION   reduce using rule 58 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    OU              reduce using rule 58 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    SEMICOLON       reduce using rule 58 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    RPAREN          reduce using rule 58 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    COLON           reduce using rule 58 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    RCOLC           reduce using rule 58 (MulExpr -> MulExpr DIVIDE UnExpr .)
+    COMMA           reduce using rule 58 (MulExpr -> MulExpr DIVIDE UnExpr .)
+
+
+state 126
+
+    (59) MulExpr -> MulExpr MOD UnExpr .
+
+    TIMES           reduce using rule 59 (MulExpr -> MulExpr MOD UnExpr .)
+    DIVIDE          reduce using rule 59 (MulExpr -> MulExpr MOD UnExpr .)
+    MOD             reduce using rule 59 (MulExpr -> MulExpr MOD UnExpr .)
+    PLUS            reduce using rule 59 (MulExpr -> MulExpr MOD UnExpr .)
+    MINUS           reduce using rule 59 (MulExpr -> MulExpr MOD UnExpr .)
+    MENOR           reduce using rule 59 (MulExpr -> MulExpr MOD UnExpr .)
+    MAIOR           reduce using rule 59 (MulExpr -> MulExpr MOD UnExpr .)
+    MAIOREQUALS     reduce using rule 59 (MulExpr -> MulExpr MOD UnExpr .)
+    MENOREQUALS     reduce using rule 59 (MulExpr -> MulExpr MOD UnExpr .)
+    EQUALS          reduce using rule 59 (MulExpr -> MulExpr MOD UnExpr .)
+    DIFF            reduce using rule 59 (MulExpr -> MulExpr MOD UnExpr .)
+    E               reduce using rule 59 (MulExpr -> MulExpr MOD UnExpr .)
+    INTERROGATION   reduce using rule 59 (MulExpr -> MulExpr MOD UnExpr .)
+    OU              reduce using rule 59 (MulExpr -> MulExpr MOD UnExpr .)
+    SEMICOLON       reduce using rule 59 (MulExpr -> MulExpr MOD UnExpr .)
+    RPAREN          reduce using rule 59 (MulExpr -> MulExpr MOD UnExpr .)
+    COLON           reduce using rule 59 (MulExpr -> MulExpr MOD UnExpr .)
+    RCOLC           reduce using rule 59 (MulExpr -> MulExpr MOD UnExpr .)
+    COMMA           reduce using rule 59 (MulExpr -> MulExpr MOD UnExpr .)
+
+
+state 127
+
+    (68) PrimExpr -> ID LCOLC . Expr RCOLC
+    (37) Expr -> . AssignExpr
+    (38) AssignExpr -> . CondExpr
+    (39) AssignExpr -> . LValueExpr ASSIGN AssignExpr
+    (40) CondExpr -> . OrExpr
+    (41) CondExpr -> . OrExpr INTERROGATION Expr COLON CondExpr
+    (64) LValueExpr -> . ID LCOLC Expr RCOLC
+    (65) LValueExpr -> . ID
+    (42) OrExpr -> . OrExpr OU AndExpr
+    (43) OrExpr -> . AndExpr
+    (44) AndExpr -> . AndExpr E EqExpr
+    (45) AndExpr -> . EqExpr
+    (46) EqExpr -> . EqExpr EQUALS DesigExpr
+    (47) EqExpr -> . EqExpr DIFF DesigExpr
+    (48) EqExpr -> . DesigExpr
+    (49) DesigExpr -> . DesigExpr MENOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (51) DesigExpr -> . DesigExpr MAIOREQUALS AddExpr
+    (52) DesigExpr -> . DesigExpr MENOREQUALS AddExpr
+    (53) DesigExpr -> . AddExpr
+    (54) AddExpr -> . AddExpr PLUS MulExpr
+    (55) AddExpr -> . AddExpr MINUS MulExpr
+    (56) AddExpr -> . MulExpr
+    (57) MulExpr -> . MulExpr TIMES UnExpr
+    (58) MulExpr -> . MulExpr DIVIDE UnExpr
+    (59) MulExpr -> . MulExpr MOD UnExpr
+    (60) MulExpr -> . UnExpr
+    (61) UnExpr -> . MINUS PrimExpr
+    (62) UnExpr -> . EXPLAMATION PrimExpr
+    (63) UnExpr -> . PrimExpr
+    (66) PrimExpr -> . ID LPAREN ListExpr RPAREN
+    (67) PrimExpr -> . ID LPAREN RPAREN
+    (68) PrimExpr -> . ID LCOLC Expr RCOLC
+    (69) PrimExpr -> . ID
+    (70) PrimExpr -> . CONSTSTRING
+    (71) PrimExpr -> . NUMBER
+    (72) PrimExpr -> . LPAREN Expr RPAREN
+
+    ID              shift and go to state 42
+    MINUS           shift and go to state 48
+    EXPLAMATION     shift and go to state 51
+    CONSTSTRING     shift and go to state 52
+    NUMBER          shift and go to state 53
+    LPAREN          shift and go to state 36
+
+    Expr                           shift and go to state 141
+    AssignExpr                     shift and go to state 39
+    CondExpr                       shift and go to state 40
+    LValueExpr                     shift and go to state 32
+    OrExpr                         shift and go to state 41
+    AndExpr                        shift and go to state 43
+    EqExpr                         shift and go to state 44
+    DesigExpr                      shift and go to state 45
+    AddExpr                        shift and go to state 46
+    MulExpr                        shift and go to state 47
+    UnExpr                         shift and go to state 49
+    PrimExpr                       shift and go to state 50
+
+state 128
+
+    (20) ListaDeclVar -> Tipo ID DeclVar SEMICOLON . ListaDeclVar
+    (19) ListaDeclVar -> .
+    (20) ListaDeclVar -> . Tipo ID DeclVar SEMICOLON ListaDeclVar
+    (21) ListaDeclVar -> . Tipo ID LCOLC NUMBER RCOLC DeclVar SEMICOLON ListaDeclVar
+    (22) Tipo -> . INT
+    (23) Tipo -> . CAR
+
+    RBRACE          reduce using rule 19 (ListaDeclVar -> .)
+    SEMICOLON       reduce using rule 19 (ListaDeclVar -> .)
+    RETORNE         reduce using rule 19 (ListaDeclVar -> .)
+    LEIA            reduce using rule 19 (ListaDeclVar -> .)
+    ESCREVA         reduce using rule 19 (ListaDeclVar -> .)
+    NOVALINHA       reduce using rule 19 (ListaDeclVar -> .)
+    SE              reduce using rule 19 (ListaDeclVar -> .)
+    ENQUANTO        reduce using rule 19 (ListaDeclVar -> .)
+    LBRACE          reduce using rule 19 (ListaDeclVar -> .)
+    ID              reduce using rule 19 (ListaDeclVar -> .)
+    MINUS           reduce using rule 19 (ListaDeclVar -> .)
+    EXPLAMATION     reduce using rule 19 (ListaDeclVar -> .)
+    CONSTSTRING     reduce using rule 19 (ListaDeclVar -> .)
+    NUMBER          reduce using rule 19 (ListaDeclVar -> .)
+    LPAREN          reduce using rule 19 (ListaDeclVar -> .)
+    INT             shift and go to state 4
+    CAR             shift and go to state 5
+
+    Tipo                           shift and go to state 17
+    ListaDeclVar                   shift and go to state 142
+
+state 129
+
+    (21) ListaDeclVar -> Tipo ID LCOLC NUMBER . RCOLC DeclVar SEMICOLON ListaDeclVar
+
+    RCOLC           shift and go to state 143
+
+
+state 130
+
+    (3) DeclFuncVar -> Tipo ID LCOLC NUMBER RCOLC DeclVar SEMICOLON . DeclFuncVar
+    (2) DeclFuncVar -> . Tipo ID DeclVar SEMICOLON DeclFuncVar
+    (3) DeclFuncVar -> . Tipo ID LCOLC NUMBER RCOLC DeclVar SEMICOLON DeclFuncVar
+    (4) DeclFuncVar -> . Tipo ID DeclFunc DeclFuncVar
+    (5) DeclFuncVar -> .
+    (22) Tipo -> . INT
+    (23) Tipo -> . CAR
+
+    PROGRAMA        reduce using rule 5 (DeclFuncVar -> .)
+    INT             shift and go to state 4
+    CAR             shift and go to state 5
+
+    Tipo                           shift and go to state 3
+    DeclFuncVar                    shift and go to state 144
+
+state 131
+
+    (8) DeclVar -> COMMA ID LCOLC NUMBER RCOLC . DeclVar
+    (7) DeclVar -> . COMMA ID DeclVar
+    (8) DeclVar -> . COMMA ID LCOLC NUMBER RCOLC DeclVar
+    (9) DeclVar -> .
+
+    COMMA           shift and go to state 14
+    SEMICOLON       reduce using rule 9 (DeclVar -> .)
+
+    DeclVar                        shift and go to state 145
+
+state 132
+
+    (14) ListaParametrosCont -> Tipo ID LCOLC RCOLC .
+    (16) ListaParametrosCont -> Tipo ID LCOLC RCOLC . COMMA ListaParametrosCont
+
+    RPAREN          reduce using rule 14 (ListaParametrosCont -> Tipo ID LCOLC RCOLC .)
+    COMMA           shift and go to state 146
+
+
+state 133
+
+    (15) ListaParametrosCont -> Tipo ID COMMA ListaParametrosCont .
+
+    RPAREN          reduce using rule 15 (ListaParametrosCont -> Tipo ID COMMA ListaParametrosCont .)
+
+
+state 134
+
+    (64) LValueExpr -> ID LCOLC Expr . RCOLC
+
+    RCOLC           shift and go to state 147
+
+
+state 135
+
+    (33) Comando -> SE LPAREN Expr RPAREN . ENTAO Comando
+    (34) Comando -> SE LPAREN Expr RPAREN . ENTAO Comando SENAO Comando
+
+    ENTAO           shift and go to state 148
+
+
+state 136
+
+    (35) Comando -> ENQUANTO LPAREN Expr RPAREN . EXECUTE Comando
+
+    EXECUTE         shift and go to state 149
+
+
+state 137
+
+    (41) CondExpr -> OrExpr INTERROGATION Expr COLON . CondExpr
+    (40) CondExpr -> . OrExpr
+    (41) CondExpr -> . OrExpr INTERROGATION Expr COLON CondExpr
+    (42) OrExpr -> . OrExpr OU AndExpr
+    (43) OrExpr -> . AndExpr
+    (44) AndExpr -> . AndExpr E EqExpr
+    (45) AndExpr -> . EqExpr
+    (46) EqExpr -> . EqExpr EQUALS DesigExpr
+    (47) EqExpr -> . EqExpr DIFF DesigExpr
+    (48) EqExpr -> . DesigExpr
+    (49) DesigExpr -> . DesigExpr MENOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (51) DesigExpr -> . DesigExpr MAIOREQUALS AddExpr
+    (52) DesigExpr -> . DesigExpr MENOREQUALS AddExpr
+    (53) DesigExpr -> . AddExpr
+    (54) AddExpr -> . AddExpr PLUS MulExpr
+    (55) AddExpr -> . AddExpr MINUS MulExpr
+    (56) AddExpr -> . MulExpr
+    (57) MulExpr -> . MulExpr TIMES UnExpr
+    (58) MulExpr -> . MulExpr DIVIDE UnExpr
+    (59) MulExpr -> . MulExpr MOD UnExpr
+    (60) MulExpr -> . UnExpr
+    (61) UnExpr -> . MINUS PrimExpr
+    (62) UnExpr -> . EXPLAMATION PrimExpr
+    (63) UnExpr -> . PrimExpr
+    (66) PrimExpr -> . ID LPAREN ListExpr RPAREN
+    (67) PrimExpr -> . ID LPAREN RPAREN
+    (68) PrimExpr -> . ID LCOLC Expr RCOLC
+    (69) PrimExpr -> . ID
+    (70) PrimExpr -> . CONSTSTRING
+    (71) PrimExpr -> . NUMBER
+    (72) PrimExpr -> . LPAREN Expr RPAREN
+
+    MINUS           shift and go to state 48
+    EXPLAMATION     shift and go to state 51
+    ID              shift and go to state 91
+    CONSTSTRING     shift and go to state 52
+    NUMBER          shift and go to state 53
+    LPAREN          shift and go to state 36
+
+    OrExpr                         shift and go to state 41
+    CondExpr                       shift and go to state 150
+    AndExpr                        shift and go to state 43
+    EqExpr                         shift and go to state 44
+    DesigExpr                      shift and go to state 45
+    AddExpr                        shift and go to state 46
+    MulExpr                        shift and go to state 47
+    UnExpr                         shift and go to state 49
+    PrimExpr                       shift and go to state 50
+
+state 138
+
+    (64) LValueExpr -> ID LCOLC Expr RCOLC .
+    (68) PrimExpr -> ID LCOLC Expr RCOLC .
+
+    ASSIGN          reduce using rule 64 (LValueExpr -> ID LCOLC Expr RCOLC .)
+    TIMES           reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    DIVIDE          reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    MOD             reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    PLUS            reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    MINUS           reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    MENOR           reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    MAIOR           reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    MAIOREQUALS     reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    MENOREQUALS     reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    EQUALS          reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    DIFF            reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    E               reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    INTERROGATION   reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    OU              reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    SEMICOLON       reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    RPAREN          reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    COLON           reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    RCOLC           reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    COMMA           reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+
+
+state 139
+
+    (66) PrimExpr -> ID LPAREN ListExpr RPAREN .
+
+    TIMES           reduce using rule 66 (PrimExpr -> ID LPAREN ListExpr RPAREN .)
+    DIVIDE          reduce using rule 66 (PrimExpr -> ID LPAREN ListExpr RPAREN .)
+    MOD             reduce using rule 66 (PrimExpr -> ID LPAREN ListExpr RPAREN .)
+    PLUS            reduce using rule 66 (PrimExpr -> ID LPAREN ListExpr RPAREN .)
+    MINUS           reduce using rule 66 (PrimExpr -> ID LPAREN ListExpr RPAREN .)
+    MENOR           reduce using rule 66 (PrimExpr -> ID LPAREN ListExpr RPAREN .)
+    MAIOR           reduce using rule 66 (PrimExpr -> ID LPAREN ListExpr RPAREN .)
+    MAIOREQUALS     reduce using rule 66 (PrimExpr -> ID LPAREN ListExpr RPAREN .)
+    MENOREQUALS     reduce using rule 66 (PrimExpr -> ID LPAREN ListExpr RPAREN .)
+    EQUALS          reduce using rule 66 (PrimExpr -> ID LPAREN ListExpr RPAREN .)
+    DIFF            reduce using rule 66 (PrimExpr -> ID LPAREN ListExpr RPAREN .)
+    E               reduce using rule 66 (PrimExpr -> ID LPAREN ListExpr RPAREN .)
+    INTERROGATION   reduce using rule 66 (PrimExpr -> ID LPAREN ListExpr RPAREN .)
+    OU              reduce using rule 66 (PrimExpr -> ID LPAREN ListExpr RPAREN .)
+    SEMICOLON       reduce using rule 66 (PrimExpr -> ID LPAREN ListExpr RPAREN .)
+    RPAREN          reduce using rule 66 (PrimExpr -> ID LPAREN ListExpr RPAREN .)
+    COLON           reduce using rule 66 (PrimExpr -> ID LPAREN ListExpr RPAREN .)
+    RCOLC           reduce using rule 66 (PrimExpr -> ID LPAREN ListExpr RPAREN .)
+    COMMA           reduce using rule 66 (PrimExpr -> ID LPAREN ListExpr RPAREN .)
+
+
+state 140
+
+    (74) ListExpr -> ListExpr COMMA . AssignExpr
+    (38) AssignExpr -> . CondExpr
+    (39) AssignExpr -> . LValueExpr ASSIGN AssignExpr
+    (40) CondExpr -> . OrExpr
+    (41) CondExpr -> . OrExpr INTERROGATION Expr COLON CondExpr
+    (64) LValueExpr -> . ID LCOLC Expr RCOLC
+    (65) LValueExpr -> . ID
+    (42) OrExpr -> . OrExpr OU AndExpr
+    (43) OrExpr -> . AndExpr
+    (44) AndExpr -> . AndExpr E EqExpr
+    (45) AndExpr -> . EqExpr
+    (46) EqExpr -> . EqExpr EQUALS DesigExpr
+    (47) EqExpr -> . EqExpr DIFF DesigExpr
+    (48) EqExpr -> . DesigExpr
+    (49) DesigExpr -> . DesigExpr MENOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (51) DesigExpr -> . DesigExpr MAIOREQUALS AddExpr
+    (52) DesigExpr -> . DesigExpr MENOREQUALS AddExpr
+    (53) DesigExpr -> . AddExpr
+    (54) AddExpr -> . AddExpr PLUS MulExpr
+    (55) AddExpr -> . AddExpr MINUS MulExpr
+    (56) AddExpr -> . MulExpr
+    (57) MulExpr -> . MulExpr TIMES UnExpr
+    (58) MulExpr -> . MulExpr DIVIDE UnExpr
+    (59) MulExpr -> . MulExpr MOD UnExpr
+    (60) MulExpr -> . UnExpr
+    (61) UnExpr -> . MINUS PrimExpr
+    (62) UnExpr -> . EXPLAMATION PrimExpr
+    (63) UnExpr -> . PrimExpr
+    (66) PrimExpr -> . ID LPAREN ListExpr RPAREN
+    (67) PrimExpr -> . ID LPAREN RPAREN
+    (68) PrimExpr -> . ID LCOLC Expr RCOLC
+    (69) PrimExpr -> . ID
+    (70) PrimExpr -> . CONSTSTRING
+    (71) PrimExpr -> . NUMBER
+    (72) PrimExpr -> . LPAREN Expr RPAREN
+
+    ID              shift and go to state 42
+    MINUS           shift and go to state 48
+    EXPLAMATION     shift and go to state 51
+    CONSTSTRING     shift and go to state 52
+    NUMBER          shift and go to state 53
+    LPAREN          shift and go to state 36
+
+    AssignExpr                     shift and go to state 151
+    CondExpr                       shift and go to state 40
+    LValueExpr                     shift and go to state 32
+    OrExpr                         shift and go to state 41
+    AndExpr                        shift and go to state 43
+    EqExpr                         shift and go to state 44
+    DesigExpr                      shift and go to state 45
+    AddExpr                        shift and go to state 46
+    MulExpr                        shift and go to state 47
+    UnExpr                         shift and go to state 49
+    PrimExpr                       shift and go to state 50
+
+state 141
+
+    (68) PrimExpr -> ID LCOLC Expr . RCOLC
+
+    RCOLC           shift and go to state 152
+
+
+state 142
+
+    (20) ListaDeclVar -> Tipo ID DeclVar SEMICOLON ListaDeclVar .
+
+    RBRACE          reduce using rule 20 (ListaDeclVar -> Tipo ID DeclVar SEMICOLON ListaDeclVar .)
+    SEMICOLON       reduce using rule 20 (ListaDeclVar -> Tipo ID DeclVar SEMICOLON ListaDeclVar .)
+    RETORNE         reduce using rule 20 (ListaDeclVar -> Tipo ID DeclVar SEMICOLON ListaDeclVar .)
+    LEIA            reduce using rule 20 (ListaDeclVar -> Tipo ID DeclVar SEMICOLON ListaDeclVar .)
+    ESCREVA         reduce using rule 20 (ListaDeclVar -> Tipo ID DeclVar SEMICOLON ListaDeclVar .)
+    NOVALINHA       reduce using rule 20 (ListaDeclVar -> Tipo ID DeclVar SEMICOLON ListaDeclVar .)
+    SE              reduce using rule 20 (ListaDeclVar -> Tipo ID DeclVar SEMICOLON ListaDeclVar .)
+    ENQUANTO        reduce using rule 20 (ListaDeclVar -> Tipo ID DeclVar SEMICOLON ListaDeclVar .)
+    LBRACE          reduce using rule 20 (ListaDeclVar -> Tipo ID DeclVar SEMICOLON ListaDeclVar .)
+    ID              reduce using rule 20 (ListaDeclVar -> Tipo ID DeclVar SEMICOLON ListaDeclVar .)
+    MINUS           reduce using rule 20 (ListaDeclVar -> Tipo ID DeclVar SEMICOLON ListaDeclVar .)
+    EXPLAMATION     reduce using rule 20 (ListaDeclVar -> Tipo ID DeclVar SEMICOLON ListaDeclVar .)
+    CONSTSTRING     reduce using rule 20 (ListaDeclVar -> Tipo ID DeclVar SEMICOLON ListaDeclVar .)
+    NUMBER          reduce using rule 20 (ListaDeclVar -> Tipo ID DeclVar SEMICOLON ListaDeclVar .)
+    LPAREN          reduce using rule 20 (ListaDeclVar -> Tipo ID DeclVar SEMICOLON ListaDeclVar .)
+
+
+state 143
+
+    (21) ListaDeclVar -> Tipo ID LCOLC NUMBER RCOLC . DeclVar SEMICOLON ListaDeclVar
+    (7) DeclVar -> . COMMA ID DeclVar
+    (8) DeclVar -> . COMMA ID LCOLC NUMBER RCOLC DeclVar
+    (9) DeclVar -> .
+
+    COMMA           shift and go to state 14
+    SEMICOLON       reduce using rule 9 (DeclVar -> .)
+
+    DeclVar                        shift and go to state 153
+
+state 144
+
+    (3) DeclFuncVar -> Tipo ID LCOLC NUMBER RCOLC DeclVar SEMICOLON DeclFuncVar .
+
+    PROGRAMA        reduce using rule 3 (DeclFuncVar -> Tipo ID LCOLC NUMBER RCOLC DeclVar SEMICOLON DeclFuncVar .)
+
+
+state 145
+
+    (8) DeclVar -> COMMA ID LCOLC NUMBER RCOLC DeclVar .
+
+    SEMICOLON       reduce using rule 8 (DeclVar -> COMMA ID LCOLC NUMBER RCOLC DeclVar .)
+
+
+state 146
+
+    (16) ListaParametrosCont -> Tipo ID LCOLC RCOLC COMMA . ListaParametrosCont
+    (13) ListaParametrosCont -> . Tipo ID
+    (14) ListaParametrosCont -> . Tipo ID LCOLC RCOLC
+    (15) ListaParametrosCont -> . Tipo ID COMMA ListaParametrosCont
+    (16) ListaParametrosCont -> . Tipo ID LCOLC RCOLC COMMA ListaParametrosCont
+    (22) Tipo -> . INT
+    (23) Tipo -> . CAR
+
+    INT             shift and go to state 4
+    CAR             shift and go to state 5
+
+    Tipo                           shift and go to state 24
+    ListaParametrosCont            shift and go to state 154
+
+state 147
+
+    (64) LValueExpr -> ID LCOLC Expr RCOLC .
+
+    SEMICOLON       reduce using rule 64 (LValueExpr -> ID LCOLC Expr RCOLC .)
+
+
+state 148
+
+    (33) Comando -> SE LPAREN Expr RPAREN ENTAO . Comando
+    (34) Comando -> SE LPAREN Expr RPAREN ENTAO . Comando SENAO Comando
+    (26) Comando -> . SEMICOLON
+    (27) Comando -> . Expr SEMICOLON
+    (28) Comando -> . RETORNE Expr SEMICOLON
+    (29) Comando -> . LEIA LValueExpr SEMICOLON
+    (30) Comando -> . ESCREVA Expr SEMICOLON
+    (31) Comando -> . ESCREVA NORMALSTRING SEMICOLON
+    (32) Comando -> . NOVALINHA SEMICOLON
+    (33) Comando -> . SE LPAREN Expr RPAREN ENTAO Comando
+    (34) Comando -> . SE LPAREN Expr RPAREN ENTAO Comando SENAO Comando
+    (35) Comando -> . ENQUANTO LPAREN Expr RPAREN EXECUTE Comando
+    (36) Comando -> . Bloco
+    (37) Expr -> . AssignExpr
+    (17) Bloco -> . LBRACE ListaDeclVar ListaComando RBRACE
+    (18) Bloco -> . LBRACE ListaDeclVar RBRACE
+    (38) AssignExpr -> . CondExpr
+    (39) AssignExpr -> . LValueExpr ASSIGN AssignExpr
+    (40) CondExpr -> . OrExpr
+    (41) CondExpr -> . OrExpr INTERROGATION Expr COLON CondExpr
+    (64) LValueExpr -> . ID LCOLC Expr RCOLC
+    (65) LValueExpr -> . ID
+    (42) OrExpr -> . OrExpr OU AndExpr
+    (43) OrExpr -> . AndExpr
+    (44) AndExpr -> . AndExpr E EqExpr
+    (45) AndExpr -> . EqExpr
+    (46) EqExpr -> . EqExpr EQUALS DesigExpr
+    (47) EqExpr -> . EqExpr DIFF DesigExpr
+    (48) EqExpr -> . DesigExpr
+    (49) DesigExpr -> . DesigExpr MENOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (51) DesigExpr -> . DesigExpr MAIOREQUALS AddExpr
+    (52) DesigExpr -> . DesigExpr MENOREQUALS AddExpr
+    (53) DesigExpr -> . AddExpr
+    (54) AddExpr -> . AddExpr PLUS MulExpr
+    (55) AddExpr -> . AddExpr MINUS MulExpr
+    (56) AddExpr -> . MulExpr
+    (57) MulExpr -> . MulExpr TIMES UnExpr
+    (58) MulExpr -> . MulExpr DIVIDE UnExpr
+    (59) MulExpr -> . MulExpr MOD UnExpr
+    (60) MulExpr -> . UnExpr
+    (61) UnExpr -> . MINUS PrimExpr
+    (62) UnExpr -> . EXPLAMATION PrimExpr
+    (63) UnExpr -> . PrimExpr
+    (66) PrimExpr -> . ID LPAREN ListExpr RPAREN
+    (67) PrimExpr -> . ID LPAREN RPAREN
+    (68) PrimExpr -> . ID LCOLC Expr RCOLC
+    (69) PrimExpr -> . ID
+    (70) PrimExpr -> . CONSTSTRING
+    (71) PrimExpr -> . NUMBER
+    (72) PrimExpr -> . LPAREN Expr RPAREN
+
+    SEMICOLON       shift and go to state 28
+    RETORNE         shift and go to state 30
+    LEIA            shift and go to state 31
+    ESCREVA         shift and go to state 33
+    NOVALINHA       shift and go to state 34
+    SE              shift and go to state 35
+    ENQUANTO        shift and go to state 37
+    LBRACE          shift and go to state 10
+    ID              shift and go to state 42
+    MINUS           shift and go to state 48
+    EXPLAMATION     shift and go to state 51
+    CONSTSTRING     shift and go to state 52
+    NUMBER          shift and go to state 53
+    LPAREN          shift and go to state 36
+
+    Expr                           shift and go to state 29
+    Comando                        shift and go to state 155
+    LValueExpr                     shift and go to state 32
+    Bloco                          shift and go to state 38
+    AssignExpr                     shift and go to state 39
+    CondExpr                       shift and go to state 40
+    OrExpr                         shift and go to state 41
+    AndExpr                        shift and go to state 43
+    EqExpr                         shift and go to state 44
+    DesigExpr                      shift and go to state 45
+    AddExpr                        shift and go to state 46
+    MulExpr                        shift and go to state 47
+    UnExpr                         shift and go to state 49
+    PrimExpr                       shift and go to state 50
+
+state 149
+
+    (35) Comando -> ENQUANTO LPAREN Expr RPAREN EXECUTE . Comando
+    (26) Comando -> . SEMICOLON
+    (27) Comando -> . Expr SEMICOLON
+    (28) Comando -> . RETORNE Expr SEMICOLON
+    (29) Comando -> . LEIA LValueExpr SEMICOLON
+    (30) Comando -> . ESCREVA Expr SEMICOLON
+    (31) Comando -> . ESCREVA NORMALSTRING SEMICOLON
+    (32) Comando -> . NOVALINHA SEMICOLON
+    (33) Comando -> . SE LPAREN Expr RPAREN ENTAO Comando
+    (34) Comando -> . SE LPAREN Expr RPAREN ENTAO Comando SENAO Comando
+    (35) Comando -> . ENQUANTO LPAREN Expr RPAREN EXECUTE Comando
+    (36) Comando -> . Bloco
+    (37) Expr -> . AssignExpr
+    (17) Bloco -> . LBRACE ListaDeclVar ListaComando RBRACE
+    (18) Bloco -> . LBRACE ListaDeclVar RBRACE
+    (38) AssignExpr -> . CondExpr
+    (39) AssignExpr -> . LValueExpr ASSIGN AssignExpr
+    (40) CondExpr -> . OrExpr
+    (41) CondExpr -> . OrExpr INTERROGATION Expr COLON CondExpr
+    (64) LValueExpr -> . ID LCOLC Expr RCOLC
+    (65) LValueExpr -> . ID
+    (42) OrExpr -> . OrExpr OU AndExpr
+    (43) OrExpr -> . AndExpr
+    (44) AndExpr -> . AndExpr E EqExpr
+    (45) AndExpr -> . EqExpr
+    (46) EqExpr -> . EqExpr EQUALS DesigExpr
+    (47) EqExpr -> . EqExpr DIFF DesigExpr
+    (48) EqExpr -> . DesigExpr
+    (49) DesigExpr -> . DesigExpr MENOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (51) DesigExpr -> . DesigExpr MAIOREQUALS AddExpr
+    (52) DesigExpr -> . DesigExpr MENOREQUALS AddExpr
+    (53) DesigExpr -> . AddExpr
+    (54) AddExpr -> . AddExpr PLUS MulExpr
+    (55) AddExpr -> . AddExpr MINUS MulExpr
+    (56) AddExpr -> . MulExpr
+    (57) MulExpr -> . MulExpr TIMES UnExpr
+    (58) MulExpr -> . MulExpr DIVIDE UnExpr
+    (59) MulExpr -> . MulExpr MOD UnExpr
+    (60) MulExpr -> . UnExpr
+    (61) UnExpr -> . MINUS PrimExpr
+    (62) UnExpr -> . EXPLAMATION PrimExpr
+    (63) UnExpr -> . PrimExpr
+    (66) PrimExpr -> . ID LPAREN ListExpr RPAREN
+    (67) PrimExpr -> . ID LPAREN RPAREN
+    (68) PrimExpr -> . ID LCOLC Expr RCOLC
+    (69) PrimExpr -> . ID
+    (70) PrimExpr -> . CONSTSTRING
+    (71) PrimExpr -> . NUMBER
+    (72) PrimExpr -> . LPAREN Expr RPAREN
+
+    SEMICOLON       shift and go to state 28
+    RETORNE         shift and go to state 30
+    LEIA            shift and go to state 31
+    ESCREVA         shift and go to state 33
+    NOVALINHA       shift and go to state 34
+    SE              shift and go to state 35
+    ENQUANTO        shift and go to state 37
+    LBRACE          shift and go to state 10
+    ID              shift and go to state 42
+    MINUS           shift and go to state 48
+    EXPLAMATION     shift and go to state 51
+    CONSTSTRING     shift and go to state 52
+    NUMBER          shift and go to state 53
+    LPAREN          shift and go to state 36
+
+    Expr                           shift and go to state 29
+    Comando                        shift and go to state 156
+    LValueExpr                     shift and go to state 32
+    Bloco                          shift and go to state 38
+    AssignExpr                     shift and go to state 39
+    CondExpr                       shift and go to state 40
+    OrExpr                         shift and go to state 41
+    AndExpr                        shift and go to state 43
+    EqExpr                         shift and go to state 44
+    DesigExpr                      shift and go to state 45
+    AddExpr                        shift and go to state 46
+    MulExpr                        shift and go to state 47
+    UnExpr                         shift and go to state 49
+    PrimExpr                       shift and go to state 50
+
+state 150
+
+    (41) CondExpr -> OrExpr INTERROGATION Expr COLON CondExpr .
+
+    SEMICOLON       reduce using rule 41 (CondExpr -> OrExpr INTERROGATION Expr COLON CondExpr .)
+    RPAREN          reduce using rule 41 (CondExpr -> OrExpr INTERROGATION Expr COLON CondExpr .)
+    COLON           reduce using rule 41 (CondExpr -> OrExpr INTERROGATION Expr COLON CondExpr .)
+    RCOLC           reduce using rule 41 (CondExpr -> OrExpr INTERROGATION Expr COLON CondExpr .)
+    COMMA           reduce using rule 41 (CondExpr -> OrExpr INTERROGATION Expr COLON CondExpr .)
+
+
+state 151
+
+    (74) ListExpr -> ListExpr COMMA AssignExpr .
+
+    RPAREN          reduce using rule 74 (ListExpr -> ListExpr COMMA AssignExpr .)
+    COMMA           reduce using rule 74 (ListExpr -> ListExpr COMMA AssignExpr .)
+
+
+state 152
+
+    (68) PrimExpr -> ID LCOLC Expr RCOLC .
+
+    TIMES           reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    DIVIDE          reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    MOD             reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    PLUS            reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    MINUS           reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    MENOR           reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    MAIOR           reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    MAIOREQUALS     reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    MENOREQUALS     reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    EQUALS          reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    DIFF            reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    E               reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    INTERROGATION   reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    OU              reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    SEMICOLON       reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    RPAREN          reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    COLON           reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    RCOLC           reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+    COMMA           reduce using rule 68 (PrimExpr -> ID LCOLC Expr RCOLC .)
+
+
+state 153
+
+    (21) ListaDeclVar -> Tipo ID LCOLC NUMBER RCOLC DeclVar . SEMICOLON ListaDeclVar
+
+    SEMICOLON       shift and go to state 157
+
+
+state 154
+
+    (16) ListaParametrosCont -> Tipo ID LCOLC RCOLC COMMA ListaParametrosCont .
+
+    RPAREN          reduce using rule 16 (ListaParametrosCont -> Tipo ID LCOLC RCOLC COMMA ListaParametrosCont .)
+
+
+state 155
+
+    (33) Comando -> SE LPAREN Expr RPAREN ENTAO Comando .
+    (34) Comando -> SE LPAREN Expr RPAREN ENTAO Comando . SENAO Comando
+
+  ! shift/reduce conflict for SENAO resolved as shift
+    SEMICOLON       reduce using rule 33 (Comando -> SE LPAREN Expr RPAREN ENTAO Comando .)
+    RETORNE         reduce using rule 33 (Comando -> SE LPAREN Expr RPAREN ENTAO Comando .)
+    LEIA            reduce using rule 33 (Comando -> SE LPAREN Expr RPAREN ENTAO Comando .)
+    ESCREVA         reduce using rule 33 (Comando -> SE LPAREN Expr RPAREN ENTAO Comando .)
+    NOVALINHA       reduce using rule 33 (Comando -> SE LPAREN Expr RPAREN ENTAO Comando .)
+    SE              reduce using rule 33 (Comando -> SE LPAREN Expr RPAREN ENTAO Comando .)
+    ENQUANTO        reduce using rule 33 (Comando -> SE LPAREN Expr RPAREN ENTAO Comando .)
+    LBRACE          reduce using rule 33 (Comando -> SE LPAREN Expr RPAREN ENTAO Comando .)
+    ID              reduce using rule 33 (Comando -> SE LPAREN Expr RPAREN ENTAO Comando .)
+    MINUS           reduce using rule 33 (Comando -> SE LPAREN Expr RPAREN ENTAO Comando .)
+    EXPLAMATION     reduce using rule 33 (Comando -> SE LPAREN Expr RPAREN ENTAO Comando .)
+    CONSTSTRING     reduce using rule 33 (Comando -> SE LPAREN Expr RPAREN ENTAO Comando .)
+    NUMBER          reduce using rule 33 (Comando -> SE LPAREN Expr RPAREN ENTAO Comando .)
+    LPAREN          reduce using rule 33 (Comando -> SE LPAREN Expr RPAREN ENTAO Comando .)
+    RBRACE          reduce using rule 33 (Comando -> SE LPAREN Expr RPAREN ENTAO Comando .)
+    SENAO           shift and go to state 158
+
+  ! SENAO           [ reduce using rule 33 (Comando -> SE LPAREN Expr RPAREN ENTAO Comando .) ]
+
+
+state 156
+
+    (35) Comando -> ENQUANTO LPAREN Expr RPAREN EXECUTE Comando .
+
+    SEMICOLON       reduce using rule 35 (Comando -> ENQUANTO LPAREN Expr RPAREN EXECUTE Comando .)
+    RETORNE         reduce using rule 35 (Comando -> ENQUANTO LPAREN Expr RPAREN EXECUTE Comando .)
+    LEIA            reduce using rule 35 (Comando -> ENQUANTO LPAREN Expr RPAREN EXECUTE Comando .)
+    ESCREVA         reduce using rule 35 (Comando -> ENQUANTO LPAREN Expr RPAREN EXECUTE Comando .)
+    NOVALINHA       reduce using rule 35 (Comando -> ENQUANTO LPAREN Expr RPAREN EXECUTE Comando .)
+    SE              reduce using rule 35 (Comando -> ENQUANTO LPAREN Expr RPAREN EXECUTE Comando .)
+    ENQUANTO        reduce using rule 35 (Comando -> ENQUANTO LPAREN Expr RPAREN EXECUTE Comando .)
+    LBRACE          reduce using rule 35 (Comando -> ENQUANTO LPAREN Expr RPAREN EXECUTE Comando .)
+    ID              reduce using rule 35 (Comando -> ENQUANTO LPAREN Expr RPAREN EXECUTE Comando .)
+    MINUS           reduce using rule 35 (Comando -> ENQUANTO LPAREN Expr RPAREN EXECUTE Comando .)
+    EXPLAMATION     reduce using rule 35 (Comando -> ENQUANTO LPAREN Expr RPAREN EXECUTE Comando .)
+    CONSTSTRING     reduce using rule 35 (Comando -> ENQUANTO LPAREN Expr RPAREN EXECUTE Comando .)
+    NUMBER          reduce using rule 35 (Comando -> ENQUANTO LPAREN Expr RPAREN EXECUTE Comando .)
+    LPAREN          reduce using rule 35 (Comando -> ENQUANTO LPAREN Expr RPAREN EXECUTE Comando .)
+    RBRACE          reduce using rule 35 (Comando -> ENQUANTO LPAREN Expr RPAREN EXECUTE Comando .)
+    SENAO           reduce using rule 35 (Comando -> ENQUANTO LPAREN Expr RPAREN EXECUTE Comando .)
+
+
+state 157
+
+    (21) ListaDeclVar -> Tipo ID LCOLC NUMBER RCOLC DeclVar SEMICOLON . ListaDeclVar
+    (19) ListaDeclVar -> .
+    (20) ListaDeclVar -> . Tipo ID DeclVar SEMICOLON ListaDeclVar
+    (21) ListaDeclVar -> . Tipo ID LCOLC NUMBER RCOLC DeclVar SEMICOLON ListaDeclVar
+    (22) Tipo -> . INT
+    (23) Tipo -> . CAR
+
+    RBRACE          reduce using rule 19 (ListaDeclVar -> .)
+    SEMICOLON       reduce using rule 19 (ListaDeclVar -> .)
+    RETORNE         reduce using rule 19 (ListaDeclVar -> .)
+    LEIA            reduce using rule 19 (ListaDeclVar -> .)
+    ESCREVA         reduce using rule 19 (ListaDeclVar -> .)
+    NOVALINHA       reduce using rule 19 (ListaDeclVar -> .)
+    SE              reduce using rule 19 (ListaDeclVar -> .)
+    ENQUANTO        reduce using rule 19 (ListaDeclVar -> .)
+    LBRACE          reduce using rule 19 (ListaDeclVar -> .)
+    ID              reduce using rule 19 (ListaDeclVar -> .)
+    MINUS           reduce using rule 19 (ListaDeclVar -> .)
+    EXPLAMATION     reduce using rule 19 (ListaDeclVar -> .)
+    CONSTSTRING     reduce using rule 19 (ListaDeclVar -> .)
+    NUMBER          reduce using rule 19 (ListaDeclVar -> .)
+    LPAREN          reduce using rule 19 (ListaDeclVar -> .)
+    INT             shift and go to state 4
+    CAR             shift and go to state 5
+
+    Tipo                           shift and go to state 17
+    ListaDeclVar                   shift and go to state 159
+
+state 158
+
+    (34) Comando -> SE LPAREN Expr RPAREN ENTAO Comando SENAO . Comando
+    (26) Comando -> . SEMICOLON
+    (27) Comando -> . Expr SEMICOLON
+    (28) Comando -> . RETORNE Expr SEMICOLON
+    (29) Comando -> . LEIA LValueExpr SEMICOLON
+    (30) Comando -> . ESCREVA Expr SEMICOLON
+    (31) Comando -> . ESCREVA NORMALSTRING SEMICOLON
+    (32) Comando -> . NOVALINHA SEMICOLON
+    (33) Comando -> . SE LPAREN Expr RPAREN ENTAO Comando
+    (34) Comando -> . SE LPAREN Expr RPAREN ENTAO Comando SENAO Comando
+    (35) Comando -> . ENQUANTO LPAREN Expr RPAREN EXECUTE Comando
+    (36) Comando -> . Bloco
+    (37) Expr -> . AssignExpr
+    (17) Bloco -> . LBRACE ListaDeclVar ListaComando RBRACE
+    (18) Bloco -> . LBRACE ListaDeclVar RBRACE
+    (38) AssignExpr -> . CondExpr
+    (39) AssignExpr -> . LValueExpr ASSIGN AssignExpr
+    (40) CondExpr -> . OrExpr
+    (41) CondExpr -> . OrExpr INTERROGATION Expr COLON CondExpr
+    (64) LValueExpr -> . ID LCOLC Expr RCOLC
+    (65) LValueExpr -> . ID
+    (42) OrExpr -> . OrExpr OU AndExpr
+    (43) OrExpr -> . AndExpr
+    (44) AndExpr -> . AndExpr E EqExpr
+    (45) AndExpr -> . EqExpr
+    (46) EqExpr -> . EqExpr EQUALS DesigExpr
+    (47) EqExpr -> . EqExpr DIFF DesigExpr
+    (48) EqExpr -> . DesigExpr
+    (49) DesigExpr -> . DesigExpr MENOR AddExpr
+    (50) DesigExpr -> . DesigExpr MAIOR AddExpr
+    (51) DesigExpr -> . DesigExpr MAIOREQUALS AddExpr
+    (52) DesigExpr -> . DesigExpr MENOREQUALS AddExpr
+    (53) DesigExpr -> . AddExpr
+    (54) AddExpr -> . AddExpr PLUS MulExpr
+    (55) AddExpr -> . AddExpr MINUS MulExpr
+    (56) AddExpr -> . MulExpr
+    (57) MulExpr -> . MulExpr TIMES UnExpr
+    (58) MulExpr -> . MulExpr DIVIDE UnExpr
+    (59) MulExpr -> . MulExpr MOD UnExpr
+    (60) MulExpr -> . UnExpr
+    (61) UnExpr -> . MINUS PrimExpr
+    (62) UnExpr -> . EXPLAMATION PrimExpr
+    (63) UnExpr -> . PrimExpr
+    (66) PrimExpr -> . ID LPAREN ListExpr RPAREN
+    (67) PrimExpr -> . ID LPAREN RPAREN
+    (68) PrimExpr -> . ID LCOLC Expr RCOLC
+    (69) PrimExpr -> . ID
+    (70) PrimExpr -> . CONSTSTRING
+    (71) PrimExpr -> . NUMBER
+    (72) PrimExpr -> . LPAREN Expr RPAREN
+
+    SEMICOLON       shift and go to state 28
+    RETORNE         shift and go to state 30
+    LEIA            shift and go to state 31
+    ESCREVA         shift and go to state 33
+    NOVALINHA       shift and go to state 34
+    SE              shift and go to state 35
+    ENQUANTO        shift and go to state 37
+    LBRACE          shift and go to state 10
+    ID              shift and go to state 42
+    MINUS           shift and go to state 48
+    EXPLAMATION     shift and go to state 51
+    CONSTSTRING     shift and go to state 52
+    NUMBER          shift and go to state 53
+    LPAREN          shift and go to state 36
+
+    Expr                           shift and go to state 29
+    Comando                        shift and go to state 160
+    LValueExpr                     shift and go to state 32
+    Bloco                          shift and go to state 38
+    AssignExpr                     shift and go to state 39
+    CondExpr                       shift and go to state 40
+    OrExpr                         shift and go to state 41
+    AndExpr                        shift and go to state 43
+    EqExpr                         shift and go to state 44
+    DesigExpr                      shift and go to state 45
+    AddExpr                        shift and go to state 46
+    MulExpr                        shift and go to state 47
+    UnExpr                         shift and go to state 49
+    PrimExpr                       shift and go to state 50
+
+state 159
+
+    (21) ListaDeclVar -> Tipo ID LCOLC NUMBER RCOLC DeclVar SEMICOLON ListaDeclVar .
+
+    RBRACE          reduce using rule 21 (ListaDeclVar -> Tipo ID LCOLC NUMBER RCOLC DeclVar SEMICOLON ListaDeclVar .)
+    SEMICOLON       reduce using rule 21 (ListaDeclVar -> Tipo ID LCOLC NUMBER RCOLC DeclVar SEMICOLON ListaDeclVar .)
+    RETORNE         reduce using rule 21 (ListaDeclVar -> Tipo ID LCOLC NUMBER RCOLC DeclVar SEMICOLON ListaDeclVar .)
+    LEIA            reduce using rule 21 (ListaDeclVar -> Tipo ID LCOLC NUMBER RCOLC DeclVar SEMICOLON ListaDeclVar .)
+    ESCREVA         reduce using rule 21 (ListaDeclVar -> Tipo ID LCOLC NUMBER RCOLC DeclVar SEMICOLON ListaDeclVar .)
+    NOVALINHA       reduce using rule 21 (ListaDeclVar -> Tipo ID LCOLC NUMBER RCOLC DeclVar SEMICOLON ListaDeclVar .)
+    SE              reduce using rule 21 (ListaDeclVar -> Tipo ID LCOLC NUMBER RCOLC DeclVar SEMICOLON ListaDeclVar .)
+    ENQUANTO        reduce using rule 21 (ListaDeclVar -> Tipo ID LCOLC NUMBER RCOLC DeclVar SEMICOLON ListaDeclVar .)
+    LBRACE          reduce using rule 21 (ListaDeclVar -> Tipo ID LCOLC NUMBER RCOLC DeclVar SEMICOLON ListaDeclVar .)
+    ID              reduce using rule 21 (ListaDeclVar -> Tipo ID LCOLC NUMBER RCOLC DeclVar SEMICOLON ListaDeclVar .)
+    MINUS           reduce using rule 21 (ListaDeclVar -> Tipo ID LCOLC NUMBER RCOLC DeclVar SEMICOLON ListaDeclVar .)
+    EXPLAMATION     reduce using rule 21 (ListaDeclVar -> Tipo ID LCOLC NUMBER RCOLC DeclVar SEMICOLON ListaDeclVar .)
+    CONSTSTRING     reduce using rule 21 (ListaDeclVar -> Tipo ID LCOLC NUMBER RCOLC DeclVar SEMICOLON ListaDeclVar .)
+    NUMBER          reduce using rule 21 (ListaDeclVar -> Tipo ID LCOLC NUMBER RCOLC DeclVar SEMICOLON ListaDeclVar .)
+    LPAREN          reduce using rule 21 (ListaDeclVar -> Tipo ID LCOLC NUMBER RCOLC DeclVar SEMICOLON ListaDeclVar .)
+
+
+state 160
+
+    (34) Comando -> SE LPAREN Expr RPAREN ENTAO Comando SENAO Comando .
+
+    SEMICOLON       reduce using rule 34 (Comando -> SE LPAREN Expr RPAREN ENTAO Comando SENAO Comando .)
+    RETORNE         reduce using rule 34 (Comando -> SE LPAREN Expr RPAREN ENTAO Comando SENAO Comando .)
+    LEIA            reduce using rule 34 (Comando -> SE LPAREN Expr RPAREN ENTAO Comando SENAO Comando .)
+    ESCREVA         reduce using rule 34 (Comando -> SE LPAREN Expr RPAREN ENTAO Comando SENAO Comando .)
+    NOVALINHA       reduce using rule 34 (Comando -> SE LPAREN Expr RPAREN ENTAO Comando SENAO Comando .)
+    SE              reduce using rule 34 (Comando -> SE LPAREN Expr RPAREN ENTAO Comando SENAO Comando .)
+    ENQUANTO        reduce using rule 34 (Comando -> SE LPAREN Expr RPAREN ENTAO Comando SENAO Comando .)
+    LBRACE          reduce using rule 34 (Comando -> SE LPAREN Expr RPAREN ENTAO Comando SENAO Comando .)
+    ID              reduce using rule 34 (Comando -> SE LPAREN Expr RPAREN ENTAO Comando SENAO Comando .)
+    MINUS           reduce using rule 34 (Comando -> SE LPAREN Expr RPAREN ENTAO Comando SENAO Comando .)
+    EXPLAMATION     reduce using rule 34 (Comando -> SE LPAREN Expr RPAREN ENTAO Comando SENAO Comando .)
+    CONSTSTRING     reduce using rule 34 (Comando -> SE LPAREN Expr RPAREN ENTAO Comando SENAO Comando .)
+    NUMBER          reduce using rule 34 (Comando -> SE LPAREN Expr RPAREN ENTAO Comando SENAO Comando .)
+    LPAREN          reduce using rule 34 (Comando -> SE LPAREN Expr RPAREN ENTAO Comando SENAO Comando .)
+    RBRACE          reduce using rule 34 (Comando -> SE LPAREN Expr RPAREN ENTAO Comando SENAO Comando .)
+    SENAO           reduce using rule 34 (Comando -> SE LPAREN Expr RPAREN ENTAO Comando SENAO Comando .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for SENAO in state 155 resolved as shift
